@@ -26,13 +26,17 @@
     self = [super init];
     
     _glRenderView = [[GLRenderView alloc] initWithFrame:rect];
-    [_glRenderView setTexture:imageData width:width height:height yaw:yaw pitch:pitch roll:roll];
+     //    [self setImage:imageData width:width height:height yaw:yaw pitch:pitch roll:roll];
+     [_glRenderView setTexture:imageData width:width height:height yaw:yaw pitch:pitch roll:roll];
     self.view = _glRenderView;
     return self;
 }
 
--(void) glkView:(GLKView *)view drawInRect:(CGRect)rect{
+-(void)glkView:(GLKView *)view drawInRect:(CGRect)rect{
     [_glRenderView draw];
 }
 
+-(void)setImage:(NSMutableData *)imageData width:(int)width height:(int)height yaw:(float)yaw roll:(float)roll pitch:(float)pitch {
+    [_glRenderView setTexture:imageData width:width height:height yaw:yaw pitch:pitch roll:roll];
+}
 @end
