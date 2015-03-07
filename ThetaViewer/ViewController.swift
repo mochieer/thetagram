@@ -8,6 +8,17 @@
 
 import UIKit
 
+func rad2deg(rad:Float) -> Float {
+    return Float(180.0 * Double(rad) / M_PI)
+}
+
+func format(deg:Float) -> Float {
+    let unit:Float = 180
+    println(Int(deg / unit))
+    var ret:Float = deg - unit * Float(Int(deg/unit))
+    return ret
+}
+
 class ViewController: UIViewController {
     
     var imageView: UIImageView!
@@ -23,7 +34,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        var path:String = NSBundle.mainBundle().pathForResource("theta1", ofType: "jpg")!
+        var path:String = NSBundle.mainBundle().pathForResource("theta2", ofType: "jpg")!
         imageData = NSMutableData(contentsOfFile: path)!
         
        
@@ -40,12 +51,13 @@ class ViewController: UIViewController {
         
         // 仰角
         //     -90 - 90
-        pitch = isnan(exif.pitch) ? 0.0 :  exif.pitch
+        pitch = isnan(exif.pitch) ? 0.0 : format(exif.pitch)
+        
+        println(String(format: "%f, %f, %f", yaw, roll, pitch))
         
         imageView = UIImageView(frame: CGRectMake(0, 0, 600, 600))
-        
         self.view.addSubview(imageView)
-       
+        
         startGLK()
     }
 
@@ -56,6 +68,7 @@ class ViewController: UIViewController {
 
     func startGLK() {
         glkView = GlkViewController(imageView!.frame, image:imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
+        glkView!.setImage(imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
         
         glkView!.view.frame = imageView!.frame
         println("startGLK imageData: \(NSString(data: imageData!, encoding:NSUTF8StringEncoding))")
