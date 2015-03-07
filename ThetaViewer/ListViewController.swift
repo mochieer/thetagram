@@ -30,10 +30,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var pitch:Float = 0.0
     var glkView:GlkViewController?
     let titles = ["ここにタイトル", "title here!", "うぇーい！", "4", "5", "6"]
-    let names = ["_akny", "_akny", "_akny", "_akny", "_akny"]
-    let dates = ["2015/3/8 14:08", "2015/3/7 20:19", "2015/3/7 12:10", "2015/3/7 12:10", "2015/3/7 12:10"]
-    let places = ["由比ヶ浜海岸", "東京ミッドタウン", "浅草大久保氏邸", "浅草大久保氏邸", "浅草大久保氏邸"]
-    let comments = ["春の由比ヶ浜海岸。浜大根の花が満開でとてもきれいでした！！", "ほげ", "ふが", "春の由比ヶ浜海岸。浜大根の花が満開でとてもきれいでした！！", "春の由比ヶ浜海岸。浜大根の花が満開でとてもきれいでした！！"]
+    let names = ["_akny", "_akny", "_akny", "_akny", "_akny", "_akny"]
+    let dates = ["2015/3/8 2:08", "2015/3/8 2:05", "2015/3/7 14:10", "2015/3/8 2:14", "2015/3/8 2:20", "2015/3/8 3:45"]
+    let places = ["東京ミッドタウン", "STARBUCKS 東京ミッドタウン店", "OpenHackDay3 会場", "ミッドタウンタワー　受付", "ミッドタウンタワー　高層階", "ミッドタウンカフェ"]
+    let comments = ["開発に飽きたのでコンテンツ集めへ", "夜のSTARBUCK まだ店員がいる", "みんながまだ元気なころ", "深夜のミッドタウンタワー受付", "東京タワーが煌めいています", "ハンモックに絡まる茜屋さん"]
     
     var initDeviceYaw:Float = 999.0
     var initDeviceRoll:Float = 999.0
@@ -64,6 +64,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // TableViewのページング処理
         tableView.pagingEnabled = true
+        
+        // TableViewの線を消す
+        tableView.separatorColor = UIColor.clearColor()
         
         // Cell名の登録をおこなう.
         tableView.registerClass(ListViewCell.self, forCellReuseIdentifier: "MyCell")
