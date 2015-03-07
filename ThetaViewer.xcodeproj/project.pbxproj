@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		178D10F71AAAD04500F02D03 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178D10F61AAAD04500F02D03 /* ListViewController.swift */; };
+		17B7D6B71AAB3870004F6AE2 /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B7D6B61AAB3870004F6AE2 /* ListViewCell.swift */; };
 		FA055B1E1AAAB44700010E69 /* glkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA055B171AAAB44700010E69 /* glkViewController.m */; };
 		FA055B1F1AAAB44700010E69 /* GLRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA055B191AAAB44700010E69 /* GLRenderView.m */; };
 		FA055B211AAAB44700010E69 /* UVSphere.m in Sources */ = {isa = PBXBuildFile; fileRef = FA055B1D1AAAB44700010E69 /* UVSphere.m */; };
@@ -69,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		178D10F61AAAD04500F02D03 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		17B7D6B61AAB3870004F6AE2 /* ListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
 		FA055B151AAAB44700010E69 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		FA055B161AAAB44700010E69 /* glkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glkViewController.h; sourceTree = "<group>"; };
 		FA055B171AAAB44700010E69 /* glkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glkViewController.m; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				FA87D8431AA9723600B1D9C4 /* Images.xcassets */,
 				FA87D8451AA9723600B1D9C4 /* LaunchScreen.xib */,
 				FA87D83A1AA9723600B1D9C4 /* Supporting Files */,
+				17B7D6B61AAB3870004F6AE2 /* ListViewCell.swift */,
 			);
 			path = ThetaViewer;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				FA87D9511AA99A3500B1D9C4 /* PtpIpStorageInfo.mm in Sources */,
 				FA055B1F1AAAB44700010E69 /* GLRenderView.m in Sources */,
 				FA87D93E1AA99A3500B1D9C4 /* logger.cpp in Sources */,
+				17B7D6B71AAB3870004F6AE2 /* ListViewCell.swift in Sources */,
 				FA87D9481AA99A3500B1D9C4 /* ptpip_packets.cpp in Sources */,
 				FA87D9501AA99A3500B1D9C4 /* PtpIpSession.mm in Sources */,
 				FA87D9431AA99A3500B1D9C4 /* exceptions.cpp in Sources */,
