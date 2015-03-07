@@ -14,7 +14,6 @@
 		FA055B211AAAB44700010E69 /* UVSphere.m in Sources */ = {isa = PBXBuildFile; fileRef = FA055B1D1AAAB44700010E69 /* UVSphere.m */; };
 		FA055B231AAADE9E00010E69 /* theta2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA055B221AAADE9E00010E69 /* theta2.jpg */; };
 		FA4042871AAAF0FD0062BF2A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4042861AAAF0FD0062BF2A /* AVFoundation.framework */; };
-		FA4042881AAAF1C70062BF2A /* movie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FA4042851AAAF0670062BF2A /* movie.mp4 */; };
 		FA87D83D1AA9723600B1D9C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87D83C1AA9723600B1D9C4 /* AppDelegate.swift */; };
 		FA87D83F1AA9723600B1D9C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87D83E1AA9723600B1D9C4 /* ViewController.swift */; };
 		FA87D8421AA9723600B1D9C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA87D8401AA9723600B1D9C4 /* Main.storyboard */; };
@@ -54,7 +53,7 @@
 		FA87D9551AA99A3500B1D9C4 /* PtpLogging.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA87D9351AA99A3500B1D9C4 /* PtpLogging.mm */; };
 		FA87D9561AA99A3500B1D9C4 /* PtpOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = FA87D9371AA99A3500B1D9C4 /* PtpOperator.m */; };
 		FA87D9571AA99A3500B1D9C4 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FA87D9381AA99A3500B1D9C4 /* README */; };
-		FA87D95C1AA9A01300B1D9C4 /* theta.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA87D95B1AA9A01300B1D9C4 /* theta.jpg */; };
+		FA87D95C1AA9A01300B1D9C4 /* theta3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA87D95B1AA9A01300B1D9C4 /* theta3.jpg */; };
 		FA87D95E1AA9A56A00B1D9C4 /* theta1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA87D95D1AA9A56A00B1D9C4 /* theta1.jpg */; };
 		FAC6ED691AAB4216002ED6AC /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6ED681AAB4216002ED6AC /* common.swift */; };
 		FAC6ED6B1AAB4261002ED6AC /* DevicePosture.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6ED6A1AAB4261002ED6AC /* DevicePosture.swift */; };
@@ -82,7 +81,6 @@
 		FA055B1C1AAAB44700010E69 /* UVSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UVSphere.h; sourceTree = "<group>"; };
 		FA055B1D1AAAB44700010E69 /* UVSphere.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UVSphere.m; sourceTree = "<group>"; };
 		FA055B221AAADE9E00010E69 /* theta2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theta2.jpg; sourceTree = "<group>"; };
-		FA4042851AAAF0670062BF2A /* movie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = movie.mp4; sourceTree = "<group>"; };
 		FA4042861AAAF0FD0062BF2A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FA87D8371AA9723600B1D9C4 /* ThetaViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThetaViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA87D83B1AA9723600B1D9C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -158,7 +156,7 @@
 		FA87D9371AA99A3500B1D9C4 /* PtpOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PtpOperator.m; sourceTree = "<group>"; };
 		FA87D9381AA99A3500B1D9C4 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		FA87D95A1AA99D3B00B1D9C4 /* Theta-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Theta-Bridging-Header.h"; sourceTree = "<group>"; };
-		FA87D95B1AA9A01300B1D9C4 /* theta.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theta.jpg; sourceTree = "<group>"; };
+		FA87D95B1AA9A01300B1D9C4 /* theta3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theta3.jpg; sourceTree = "<group>"; };
 		FA87D95D1AA9A56A00B1D9C4 /* theta1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theta1.jpg; sourceTree = "<group>"; };
 		FAC6ED681AAB4216002ED6AC /* common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = common.swift; sourceTree = "<group>"; };
 		FAC6ED6A1AAB4261002ED6AC /* DevicePosture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicePosture.swift; sourceTree = "<group>"; };
@@ -247,10 +245,9 @@
 		FA87D83A1AA9723600B1D9C4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FA4042851AAAF0670062BF2A /* movie.mp4 */,
 				FA055B221AAADE9E00010E69 /* theta2.jpg */,
 				FA87D95D1AA9A56A00B1D9C4 /* theta1.jpg */,
-				FA87D95B1AA9A01300B1D9C4 /* theta.jpg */,
+				FA87D95B1AA9A01300B1D9C4 /* theta3.jpg */,
 				FA87D83B1AA9723600B1D9C4 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -461,7 +458,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA4042881AAAF1C70062BF2A /* movie.mp4 in Resources */,
 				FA87D9531AA99A3500B1D9C4 /* README in Resources */,
 				FA87D93B1AA99A3500B1D9C4 /* README in Resources */,
 				FA87D95E1AA9A56A00B1D9C4 /* theta1.jpg in Resources */,
@@ -470,7 +466,7 @@
 				FA87D8441AA9723600B1D9C4 /* Images.xcassets in Resources */,
 				FA055B231AAADE9E00010E69 /* theta2.jpg in Resources */,
 				FA87D9571AA99A3500B1D9C4 /* README in Resources */,
-				FA87D95C1AA9A01300B1D9C4 /* theta.jpg in Resources */,
+				FA87D95C1AA9A01300B1D9C4 /* theta3.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

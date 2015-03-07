@@ -26,7 +26,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var roll:Float = 0.0
     var pitch:Float = 0.0
     var glkView:GlkViewController?
-    let titles = ["ここにタイトル", "title here!"]
+    let titles = ["ここにタイトル", "title here!", "うぇーい！"]
     
     var initDeviceYaw:Float = 999.0
     var initDeviceRoll:Float = 999.0
@@ -76,7 +76,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
