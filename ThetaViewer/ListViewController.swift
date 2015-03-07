@@ -14,21 +14,23 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     // UI
     var tableView: UITableView!
     
+    let WINDOW_HEIGHT: CGFloat = UIScreen.mainScreen().bounds.height
+    let WINDOW_WIDTH: CGFloat = UIScreen.mainScreen().bounds.width
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Status Barの高さを取得する.
-        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
-        
-        // Viewの高さと幅を取得する.
-        let displayWidth: CGFloat = self.view.frame.width
-        let displayHeight: CGFloat = self.view.frame.height
+        // navigationbarを非表示
+        self.navigationController?.navigationBarHidden = true
         
         // TableViewの生成する(status barの高さ分ずらして表示).
-        tableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: WINDOW_HEIGHT, height: WINDOW_HEIGHT))
+        
+        // TableViewのページング処理
+        tableView.pagingEnabled = true
         
         // Cell名の登録をおこなう.
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        tableView.registerClass(ListViewCell.self, forCellReuseIdentifier: "MyCell")
         
         // DataSourceの設定をする.
         tableView.dataSource = self
@@ -40,20 +42,27 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(tableView)
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 5
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return WINDOW_HEIGHT
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        // Cellの.を取得する.
-        let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) as UITableViewCell
+
+        let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) as ListViewCell
         
-        // Cellに値を設定する.
-        cell.textLabel!.text = "test"
+        cell.titleLabel.text = "ここにタイトル"
         
         return cell
     }
