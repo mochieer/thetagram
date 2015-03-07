@@ -58,6 +58,9 @@
 		FAC6ED691AAB4216002ED6AC /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6ED681AAB4216002ED6AC /* common.swift */; };
 		FAC6ED6B1AAB4261002ED6AC /* DevicePosture.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6ED6A1AAB4261002ED6AC /* DevicePosture.swift */; };
 		FAC6ED711AAB4AA8002ED6AC /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC6ED701AAB4AA7002ED6AC /* GLView.m */; };
+		FAC6ED811AAB8853002ED6AC /* theta4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAC6ED7E1AAB8853002ED6AC /* theta4.jpg */; };
+		FAC6ED821AAB8853002ED6AC /* theta5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAC6ED7F1AAB8853002ED6AC /* theta5.jpg */; };
+		FAC6ED831AAB8853002ED6AC /* theta6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FAC6ED801AAB8853002ED6AC /* theta6.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +165,9 @@
 		FAC6ED6A1AAB4261002ED6AC /* DevicePosture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicePosture.swift; sourceTree = "<group>"; };
 		FAC6ED6F1AAB4A46002ED6AC /* GLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
 		FAC6ED701AAB4AA7002ED6AC /* GLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLView.m; sourceTree = "<group>"; };
+		FAC6ED7E1AAB8853002ED6AC /* theta4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theta4.jpg; sourceTree = "<group>"; };
+		FAC6ED7F1AAB8853002ED6AC /* theta5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theta5.jpg; sourceTree = "<group>"; };
+		FAC6ED801AAB8853002ED6AC /* theta6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theta6.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +251,9 @@
 		FA87D83A1AA9723600B1D9C4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FAC6ED7E1AAB8853002ED6AC /* theta4.jpg */,
+				FAC6ED7F1AAB8853002ED6AC /* theta5.jpg */,
+				FAC6ED801AAB8853002ED6AC /* theta6.jpg */,
 				FA055B221AAADE9E00010E69 /* theta2.jpg */,
 				FA87D95D1AA9A56A00B1D9C4 /* theta1.jpg */,
 				FA87D95B1AA9A01300B1D9C4 /* theta3.jpg */,
@@ -460,9 +469,12 @@
 			files = (
 				FA87D9531AA99A3500B1D9C4 /* README in Resources */,
 				FA87D93B1AA99A3500B1D9C4 /* README in Resources */,
+				FAC6ED821AAB8853002ED6AC /* theta5.jpg in Resources */,
 				FA87D95E1AA9A56A00B1D9C4 /* theta1.jpg in Resources */,
 				FA87D8421AA9723600B1D9C4 /* Main.storyboard in Resources */,
+				FAC6ED831AAB8853002ED6AC /* theta6.jpg in Resources */,
 				FA87D8471AA9723600B1D9C4 /* LaunchScreen.xib in Resources */,
+				FAC6ED811AAB8853002ED6AC /* theta4.jpg in Resources */,
 				FA87D8441AA9723600B1D9C4 /* Images.xcassets in Resources */,
 				FA055B231AAADE9E00010E69 /* theta2.jpg in Resources */,
 				FA87D9571AA99A3500B1D9C4 /* README in Resources */,

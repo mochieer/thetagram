@@ -26,7 +26,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var roll:Float = 0.0
     var pitch:Float = 0.0
     var glkView:GlkViewController?
-    let titles = ["ここにタイトル", "title here!", "うぇーい！"]
+    let titles = ["ここにタイトル", "title here!", "うぇーい！", "4", "5", "6"]
     
     var initDeviceYaw:Float = 999.0
     var initDeviceRoll:Float = 999.0
