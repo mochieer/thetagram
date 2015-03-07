@@ -6,11 +6,11 @@
 #define ricoh_theta_sample_for_ios_Constants_h
 
 /** Camera FOV initial value */
-#define CAMERA_FOV_DEGREE_INIT          (45.0f)
+#define CAMERA_FOV_DEGREE_INIT          (120.0f)
 /** Camera FOV minimum value */
-#define CAMERA_FOV_DEGREE_MIN           (30.0f)
+#define CAMERA_FOV_DEGREE_MIN           (80.0f)
 /** Camera FOV maximum value */
-#define CAMERA_FOV_DEGREE_MAX           (100.0f)
+#define CAMERA_FOV_DEGREE_MAX           (175.0f)
 /** Z/NEAR for OpenGL perspective display */
 #define Z_NEAR                          (0.1f)
 /** Z/FA for OpenGL perspective display */
@@ -27,9 +27,9 @@
 #define DIVIDE_ROTATE_Y                 (500)
 
 /** Parameter for maximum width control */
-#define SCALE_RATIO_TICK_EXPANSION      (1.05f)
+#define SCALE_RATIO_TICK_EXPANSION      (1.02f)
 /** Parameter for minimum width control */
-#define SCALE_RATIO_TICK_REDUCTION      (0.95f)
+#define SCALE_RATIO_TICK_REDUCTION      (0.98f)
 
 #define KNUM_INTERVAL_INERTIA           (0.020)
 #define INERTIA_1ST_SHORT_ADJUST(a)     (a / 3.0)

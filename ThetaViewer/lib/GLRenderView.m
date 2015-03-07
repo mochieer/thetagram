@@ -13,23 +13,23 @@
 
 
 NSString *vertexShader = @""
-    "attribute vec4 aPosition;\n"
-    "attribute vec2 aUV;\n"
-    "uniform mat4 uProjection;\n"
-    "uniform mat4 uView;\n"
-    "uniform mat4 uModel;\n"
-    "varying vec2 vUV;\n"
-    "void main() {\n"
-    "  gl_Position = uProjection * uView * uModel * aPosition;\n"
-    "  vUV = aUV;\n"
-    "}\n";
+"attribute vec4 aPosition;\n"
+"attribute vec2 aUV;\n"
+"uniform mat4 uProjection;\n"
+"uniform mat4 uView;\n"
+"uniform mat4 uModel;\n"
+"varying vec2 vUV;\n"
+"void main() {\n"
+"  gl_Position = uProjection * uView * uModel * aPosition;\n"
+"  vUV = aUV;\n"
+"}\n";
 NSString *fragmentShader = @""
-    "precision mediump float;\n"
-    "varying vec2 vUV;\n"
-    "uniform sampler2D uTex;\n"
-    "void main() {\n"
-    "  gl_FragColor = texture2D(uTex, vUV);\n"
-    "}\n";
+"precision mediump float;\n"
+"varying vec2 vUV;\n"
+"uniform sampler2D uTex;\n"
+"void main() {\n"
+"  gl_FragColor = texture2D(uTex, vUV);\n"
+"}\n";
 
 
 typedef enum : int {
@@ -48,10 +48,10 @@ typedef enum : int {
  *
  * These images are pasted as texture onto a spherical object on OpenGL using UVSphere
  * from this class.  As this sphere is drawn at an angle from -pi to pi on the xz plane,
- * the UV coordinates are generated in this orientation and attached to the image, 
+ * the UV coordinates are generated in this orientation and attached to the image,
  * and are attached so that a mirror image is not generated in the x axis direction
  * when viewed from the inside of the sphere.
- * 
+ *
  * Furthermore, as the camera image is from angle -pi, the center of the image captured by
  * camera #1 faces forward from the x axis. The camera image is slanted at the angle of elevation
  * and horizontal angle, the sphere is rotated at each angle, and the image displayed in the x axis
@@ -62,10 +62,10 @@ typedef enum : int {
  */
 @interface GLRenderView (){
     UVSphere *shell;
-
+    
     UIPanGestureRecognizer *panGestureRecognizer;
     UIPinchGestureRecognizer *pinchGestureRecognizer;
-
+    
     float _yaw;
     float _roll;
     float _pitch;
@@ -138,7 +138,7 @@ typedef enum : int {
     _timerCount = 0;
     _timer = nil;
     _kindInertia = NoneInertia;
-
+    
     projectionMatrix = GLKMatrix4Identity;
     lookAtMatrix = GLKMatrix4Identity;
     modelMatrix = GLKMatrix4Identity;
@@ -154,10 +154,10 @@ typedef enum : int {
     cameraUpY = 1.0f;
     cameraUpZ = 0.0f;
     
-    cameraFovDegree = CAMERA_FOV_DEGREE_INIT * 2;
+    cameraFovDegree = CAMERA_FOV_DEGREE_INIT;
     
     inPanMode = FALSE;
-
+    
     mRotationAngleXZ = 0.0f;
     mRotationAngleY = 0.0f;
     
@@ -183,19 +183,19 @@ typedef enum : int {
  * Gesture registration method
  */
 -(void) registerGestures{
-
+    
     /*
      * ジェスチャは受け付けない
-    panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureHandler:)];
-    [panGestureRecognizer setMaximumNumberOfTouches:1];
-    [self addGestureRecognizer:panGestureRecognizer];
-    NSLog(@"add panGesture.");
-    */
+     panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureHandler:)];
+     [panGestureRecognizer setMaximumNumberOfTouches:1];
+     [self addGestureRecognizer:panGestureRecognizer];
+     NSLog(@"add panGesture.");
+     */
     
     pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGestureHandler:)];
     [self addGestureRecognizer:pinchGestureRecognizer];
     //NSLog(@"add pinchGesture.");
-
+    
     return;
 }
 
@@ -216,7 +216,7 @@ typedef enum : int {
     mTextureInfo=[GLKTextureLoader textureWithContentsOfData:data options:nil error:&error];
     tex_name = mTextureInfo.name;
     printf("texture name = %d\n",tex_name);
-
+    
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex_name);
     
@@ -261,16 +261,16 @@ typedef enum : int {
  * @param context OpenGL Context
  */
 -(void) initOpenGLSettings:(EAGLContext*)context{
-
+    
     float viewWidth = self.frame.size.width;
     float viewHeight = self.frame.size.height;
     
     shaderProgram = [self loadProgram:vertexShader fShaderSrc:fragmentShader];
     [self useAndAttachLocation: shaderProgram];
-
+    
     //NSLog(@"frame width: %d hegith: %d", (int)self.frame.size.width, (int)self.frame.size.height);
     
-    glClearColor(0.0f, 0.0f, 1.0f, 0.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     
     viewAspectRatio = viewWidth/viewHeight;
     glViewport(0, 0, viewWidth, viewHeight);
@@ -292,14 +292,14 @@ typedef enum : int {
     cameraDirectionX = (float) (cos(mRotationAngleXZ)*cos(mRotationAngleY));
     cameraDirectionZ = (float) (sin(mRotationAngleXZ)*cos(mRotationAngleY));
     cameraDirectionY = (float) sin(mRotationAngleY);
-
+    
     //NSLog(@"camera direction: %f %f %f", cameraDirectionX, cameraDirectionY, cameraDirectionZ);
     
     projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(cameraFovDegree), viewAspectRatio, Z_NEAR, Z_FAR);
     lookAtMatrix = GLKMatrix4MakeLookAt(cameraPosX, cameraPosY, cameraPosZ,
                                         cameraDirectionX, cameraDirectionY, cameraDirectionZ,
                                         cameraUpX, cameraUpY, cameraUpZ);
-
+    
     GLKMatrix4 elevetionAngleMatrix = GLKMatrix4MakeRotation(GLKMathDegreesToRadians(_pitch), 0, 0, 1);
     modelMatrix = GLKMatrix4Multiply(modelMatrix, elevetionAngleMatrix);
     GLKMatrix4 horizontalAngleMatrix = GLKMatrix4MakeRotation(GLKMathDegreesToRadians(_roll), 1, 0, 0);
@@ -331,7 +331,7 @@ typedef enum : int {
  * @param event Event
  */
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-
+    
     [_timer invalidate];
     _timer = nil;
     _timerCount = 0;
@@ -378,7 +378,7 @@ typedef enum : int {
  * @param recognizer Recognizer object for gesture operations
  */
 -(void) pinchGestureHandler:(UIPinchGestureRecognizer*)recognizer {
-
+    
     [self scale:[recognizer scale]];
     //NSLog(@"pinchHandler state = %d, zoom = %f, scale = %f", [sender state], zoom, [sender scale]);
     
@@ -392,35 +392,35 @@ typedef enum : int {
 -(void) panGestureHandler:(UIPanGestureRecognizer*)recognizer {
     
     CGPoint cur = [recognizer translationInView:self];
-
+    
     switch ([recognizer state]) {
-    case UIGestureRecognizerStateEnded:
-        //NSLog(@"pan gesture ended");
-        [_timer invalidate];
-        _timerCount = 0;
-        if(_kindInertia != NoneInertia) {
-            _timer = [NSTimer scheduledTimerWithTimeInterval:KNUM_INTERVAL_INERTIA
-                            target:self
-                            selector:@selector(timerInfo:)
-                            userInfo:nil
-                            repeats:YES];
-        }
-        break;
-    default:
-        if (inPanMode) {
-            panLastDiffX = cur.x - panPrev.x;
-            panLastDiffY = cur.y - panPrev.y;
-            
-            panPrev = cur;
-            [self rotate:-panLastDiffX diffy:panLastDiffY];
-        }
-        else {
-            inPanMode = true;
-            panPrev = cur;
-        }
-        break;
+        case UIGestureRecognizerStateEnded:
+            //NSLog(@"pan gesture ended");
+            [_timer invalidate];
+            _timerCount = 0;
+            if(_kindInertia != NoneInertia) {
+                _timer = [NSTimer scheduledTimerWithTimeInterval:KNUM_INTERVAL_INERTIA
+                                                          target:self
+                                                        selector:@selector(timerInfo:)
+                                                        userInfo:nil
+                                                         repeats:YES];
+            }
+            break;
+        default:
+            if (inPanMode) {
+                panLastDiffX = cur.x - panPrev.x;
+                panLastDiffY = cur.y - panPrev.y;
+                
+                panPrev = cur;
+                [self rotate:-panLastDiffX diffy:panLastDiffY];
+            }
+            else {
+                inPanMode = true;
+                panPrev = cur;
+            }
+            break;
     }
-
+    
     //NSLog(@"pan handler state %d pos %f %f", [recognizer state], cur.x, cur.y);
     return;
 }
@@ -433,16 +433,16 @@ typedef enum : int {
 {
     int diffX = 0;
     int diffY = 0;
-
+    
     if (_timerCount == 0) {
         inertiaRatio = 1.0;
         switch (_kindInertia) {
-        case ShortInertia:
-            inertiaRatio = WEAK_INERTIA_RATIO;
-            break;
-        case LongInertia:
-            inertiaRatio = STRONG_INERTIA_RATIO;
-            break;
+            case ShortInertia:
+                inertiaRatio = WEAK_INERTIA_RATIO;
+                break;
+            case LongInertia:
+                inertiaRatio = STRONG_INERTIA_RATIO;
+                break;
         }
     } else if(_timerCount > 150) {
         [_timer invalidate];
@@ -452,10 +452,10 @@ typedef enum : int {
     } else {
         diffX = panLastDiffX*(1.0/_timerCount)*inertiaRatio;
         diffY = panLastDiffY*(1.0/_timerCount)*inertiaRatio;
-
+        
         [self rotate:-diffX diffy:diffY];
     }
-
+    
     //NSLog(@"********** timerInfo : %d lastx %d lasty %d x %d y %d ratio %f **********",
     //      _timerCount, panLastDiffX, panLastDiffX, diffX, diffY, inertiaRatio);
     _timerCount++;
@@ -483,7 +483,7 @@ typedef enum : int {
         }
     }
     
-    //NSLog(@"cameraFovDegree: %f", cameraFovDegree);
+    //     NSLog(@"cameraFovDegree: %f", cameraFovDegree);
     
     return;
 }
@@ -494,7 +494,7 @@ typedef enum : int {
  * @param diffy Rotation amount (xy plane)
  */
 -(void) rotate:(int) diffx diffy:(int) diffy {
-
+    
     float xz;
     float y;
     
@@ -521,7 +521,7 @@ typedef enum : int {
  * @param @shaderSrc Shader source
  */
 -(GLuint) loadShader:(GLenum)shaderType shaderSrc:(NSString *)shaderSrc {
-
+    
     GLuint shader;
     GLint compiled;
     const char* shaderRealSrc = [shaderSrc cStringUsingEncoding:NSUTF8StringEncoding];
@@ -631,7 +631,7 @@ typedef enum : int {
     
     glUseProgram(program);
     [self glCheckError:@"glUseProgram"];
-
+    
     aPosition = glGetAttribLocation(program, "aPosition");
     [self glCheckError:@"glGetAttribLocation position"];
     aUV = glGetAttribLocation(program, "aUV");
