@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var imageView: UIImageView!
+    var imageView: UIImageView!
     
     let imageWidth:Int32 = 2048;
     let imageHeight:Int32 = 1024;
@@ -19,11 +19,6 @@ class ViewController: UIViewController {
     var pitch:Float = 0.0
     var imageData:NSMutableData?
     var glkView:GlkViewController?
-
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +41,10 @@ class ViewController: UIViewController {
         // 仰角
         //     -90 - 90
         pitch = isnan(exif.pitch) ? 0.0 :  exif.pitch
+        
+        imageView = UIImageView(frame: CGRectMake(0, 0, 600, 600))
+        
+        self.view.addSubview(imageView)
        
         startGLK()
     }
