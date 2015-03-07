@@ -96,23 +96,9 @@ class ViewController: UIViewController, MyProtocol {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    func refleshGLK() {
-        if (yaw < 0.0) {
-            yaw = 0.0
-        } else if (yaw > 360.0) {
-            yaw = 360.0
-        }
-        if (roll < 0.0) {
-            roll = 360.0 - roll
-        } else if (roll > 360) {
-            roll -= 360.0
-        }
-        if (pitch < -90.0) {
-            pitch = -90.0
-        } else if (pitch > 90.0) {
-            pitch = 90.0
-        }
-        glkView?.setPosture(yaw, roll: roll, pitch: pitch)
+    func refleshGLK(diffx:Int, diffy:Int) {
+        glkView?.setRotation(Int32(diffx), diffy: Int32(diffy))
+
     }
     
     func detect(att: CMAttitude) {
@@ -170,7 +156,7 @@ class ViewController: UIViewController, MyProtocol {
             }
         }
         
-        refleshGLK()
+        refleshGLK(Int(-1 * diffRoll * 1.3), diffy: Int(diffPitch))
     }
     
 }

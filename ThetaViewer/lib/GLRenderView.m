@@ -152,7 +152,7 @@ typedef enum : int {
     cameraUpY = 1.0f;
     cameraUpZ = 0.0f;
     
-    cameraFovDegree = CAMERA_FOV_DEGREE_INIT;
+    cameraFovDegree = CAMERA_FOV_DEGREE_INIT * 2;
     
     inPanMode = FALSE;
 
@@ -180,10 +180,13 @@ typedef enum : int {
  */
 -(void) registerGestures{
 
+    /*
+     * ジェスチャは受け付けない
     panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureHandler:)];
     [panGestureRecognizer setMaximumNumberOfTouches:1];
     [self addGestureRecognizer:panGestureRecognizer];
     NSLog(@"add panGesture.");
+    */
     
     pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGestureHandler:)];
     [self addGestureRecognizer:pinchGestureRecognizer];
