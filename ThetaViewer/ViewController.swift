@@ -130,7 +130,7 @@ class ViewController: UIViewController, MyProtocol {
         var diffPitch = devicePitch - getAverage(pitchBuff)
         // TODO: stdout
         // println(String(format:"dev = (%.2f, %.2f, %.2f)", radiansToDegrees(att.yaw), radiansToDegrees(att.roll), radiansToDegrees(att.pitch)))
-        // println(String(format:"diff = (%.2f, %.2f, %.2f)", radiansToDegrees(att.yaw), radiansToDegrees(att.roll), radiansToDegrees(att.pitch)))
+        println(String(format:"diff = (%.2f, %.2f, %.2f)", diffYaw, diffRoll, diffPitch))
         // println(String(format:"pic = (%.2f, %.2f, %.2f)", yaw, roll, pitch))
         
         // TOOD: ここいらん　洗い出して削除

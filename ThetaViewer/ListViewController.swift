@@ -42,7 +42,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var yawBuff:[Float] = Array(count: 50, repeatedValue: 0.0)
     var rollBuff:[Float] = Array(count: 50, repeatedValue: 0.0)
     var pitchBuff:[Float] = Array(count: 50, repeatedValue: 0.0)
-    
     var buffIndex:Int = 0
     
     var openedRow = 0
@@ -56,7 +55,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // navigationbarを非表示
         self.navigationController?.navigationBarHidden = true
         
@@ -125,7 +124,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         openedRow = row
         let path:String = NSBundle.mainBundle().pathForResource("theta" + String(row+1), ofType: "jpg")!
         println("Read file =  \(path)")
-
+        
         let imageData = NSMutableData(contentsOfFile: path)!
         getPostureFromData(imageData)
         
@@ -144,7 +143,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         infoButton.setImage(imageNormal, forState: .Normal)
         infoButton.setImage(imageTapped, forState: .Highlighted)
         glkView!.view.addSubview(infoButton)
-
+        
         return glkView!.view
     }
     
@@ -156,7 +155,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         unvisibleLayer.addTarget(self, action: "closeModal:", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(unvisibleLayer)
         openModal(names[openedRow], place: places[openedRow], date: dates[openedRow], comment: comments[openedRow])
-
+        
     }
     
     func openModal(user:String, place:String, date:String, comment:String) {
@@ -184,7 +183,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.modalView.alpha = 0.0
         })
     }
-
+    
     func refleshGLK(diffx:Int, diffy:Int) {
         glkView?.setRotation(Int32(diffx), diffy: Int32(diffy))
     }
@@ -207,18 +206,27 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         yawBuff[buffIndex] = deviceYaw
         pitchBuff[buffIndex] = devicePitch
         rollBuff[buffIndex] = deviceRoll
-        buffIndex += 1
         
+        buffIndex += 1
         if (buffIndex == 50) {
             buffIndex = 0
         }
         
         var diffYaw = deviceYaw - getAverage(yawBuff)
-        var diffRoll = deviceRoll - getAverage(rollBuff)
+        var diffRoll = getAverage(rollBuff) // deviceRoll - getAverage(rollBuff)
         var diffPitch = devicePitch - getAverage(pitchBuff)
+        
+        if(abs(initDeviceRoll - deviceRoll) < 5.0 ){
+            diffRoll = diffRoll / 2
+            
+            if(abs(initDeviceRoll - deviceRoll) < 1.0 ){
+                diffRoll = 0
+            }
+        }
+        // println(String(format:"diff = (%2.2f, %2.2f, %2.2f)", diffYaw, diffRoll, diffPitch))
         
         refleshGLK(Int(-1 * diffRoll * 1.3), diffy: Int(diffPitch))
     }
-
+    
     
 }
