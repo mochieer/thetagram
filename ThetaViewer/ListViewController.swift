@@ -22,19 +22,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var yaw:Float = 0.0
     var roll:Float = 0.0
     var pitch:Float = 0.0
-    var imageData:NSMutableData?
+    // var imageData:NSMutableData?
     var glkView:GlkViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        var path:String = NSBundle.mainBundle().pathForResource("theta2", ofType: "jpg")!
-        imageData = NSMutableData(contentsOfFile: path)!
-        
-        getPostureFromData(imageData)
-        
-        //        startGLK()
-        
         // navigationbarを非表示
         self.navigationController?.navigationBarHidden = true
         
@@ -68,7 +60,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 2
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -80,7 +72,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) as ListViewCell
         
         let view = UIImageView(frame: CGRectMake(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT))
-        cell.setThumbnailImage(startGLK(view))
+        cell.setThumbnailImage(startGLK(view, row:indexPath.row))
         cell.titleLabel.text = "ここにタイトル"
         
         return cell
@@ -92,7 +84,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationController!.pushViewController(vc, animated: true)
     }
     
-    func startGLK(view:UIImageView?) -> UIView {
+    func startGLK(view:UIImageView?, row:Int) -> UIView {
+        let path:String = NSBundle.mainBundle().pathForResource("theta" + String(row+1), ofType: "jpg")!
+        let imageData = NSMutableData(contentsOfFile: path)!
+        getPostureFromData(imageData)
+        
         glkView = GlkViewController(view!.frame, image:imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
         glkView!.view.frame = view!.frame
         glkView!.view.userInteractionEnabled = false
