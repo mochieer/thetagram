@@ -8,11 +8,14 @@
 
 import Foundation
 import UIKit
+import CoreMotion
 
-class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MyProtocol {
     
     // UI
     var tableView: UITableView!
+    
+    var device = DevicePosture()
     
     let WINDOW_HEIGHT: CGFloat = UIScreen.mainScreen().bounds.height
     let WINDOW_WIDTH: CGFloat = UIScreen.mainScreen().bounds.width
@@ -25,8 +28,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var glkView:GlkViewController?
     let titles = ["ここにタイトル", "title here!"]
     
+    var initDeviceYaw:Float = 999.0
+    var initDeviceRoll:Float = 999.0
+    var initDevicePitch:Float = 999.0
+    
+    var yawBuff:[Float] = Array(count: 50, repeatedValue: 0.0)
+    var rollBuff:[Float] = Array(count: 50, repeatedValue: 0.0)
+    var pitchBuff:[Float] = Array(count: 50, repeatedValue: 0.0)
+    
+    var buffIndex:Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // navigationbarを非表示
         self.navigationController?.navigationBarHidden = true
         
@@ -48,7 +62,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Viewに追加する.
         self.view.addSubview(tableView)
         
-        
+        // 傾き取得
+        self.device.prot = self
+        self.device.start()
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -97,5 +113,41 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         return glkView!.view
     }
+        
+    func refleshGLK(diffx:Int, diffy:Int) {
+        glkView?.setRotation(Int32(diffx), diffy: Int32(diffy))
+    }
+    
+    func detect(att: CMAttitude) {
+        var deviceYaw = Float(radiansToDegrees(att.yaw))
+        var devicePitch = Float(radiansToDegrees(att.pitch))
+        var deviceRoll = Float(radiansToDegrees(att.roll))
+        
+        // 初期値セット
+        if (initDeviceYaw > 900.0 && initDeviceRoll > 900.0 && initDevicePitch > 900.0) {
+            initDeviceYaw = deviceYaw
+            initDevicePitch = devicePitch
+            initDeviceRoll = deviceRoll
+            yawBuff = Array(count: 50, repeatedValue: deviceYaw)
+            pitchBuff = Array(count: 50, repeatedValue: devicePitch)
+            rollBuff = Array(count: 50, repeatedValue: deviceRoll)
+        }
+        
+        yawBuff[buffIndex] = deviceYaw
+        pitchBuff[buffIndex] = devicePitch
+        rollBuff[buffIndex] = deviceRoll
+        buffIndex += 1
+        
+        if (buffIndex == 50) {
+            buffIndex = 0
+        }
+        
+        var diffYaw = deviceYaw - getAverage(yawBuff)
+        var diffRoll = deviceRoll - getAverage(rollBuff)
+        var diffPitch = devicePitch - getAverage(pitchBuff)
+        
+        refleshGLK(Int(-1 * diffRoll * 1.3), diffy: Int(diffPitch))
+    }
+
     
 }
