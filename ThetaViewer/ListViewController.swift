@@ -17,8 +17,23 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     let WINDOW_HEIGHT: CGFloat = UIScreen.mainScreen().bounds.height
     let WINDOW_WIDTH: CGFloat = UIScreen.mainScreen().bounds.width
     
+    let imageWidth:Int32 = 2048;
+    let imageHeight:Int32 = 1024;
+    var yaw:Float = 0.0
+    var roll:Float = 0.0
+    var pitch:Float = 0.0
+    var imageData:NSMutableData?
+    var glkView:GlkViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var path:String = NSBundle.mainBundle().pathForResource("theta2", ofType: "jpg")!
+        imageData = NSMutableData(contentsOfFile: path)!
+        
+        getPostureFromData(imageData)
+        
+        //        startGLK()
         
         // navigationbarを非表示
         self.navigationController?.navigationBarHidden = true
@@ -40,6 +55,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // Viewに追加する.
         self.view.addSubview(tableView)
+        
+        
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -59,9 +76,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) as ListViewCell
         
+        let view = UIImageView(frame: CGRectMake(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT))
+        cell.setThumbnailImage(startGLK(view))
         cell.titleLabel.text = "ここにタイトル"
         
         return cell
@@ -72,5 +91,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let vc: ViewController = ViewController()
         self.navigationController!.pushViewController(vc, animated: true)
     }
+    
+    func startGLK(view:UIImageView?) -> UIView {
+        glkView = GlkViewController(view!.frame, image:imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
+        glkView!.view.frame = view!.frame
+        glkView!.view.userInteractionEnabled = false
+        return glkView!.view
+        //        self.view.addSubview(glkView!.view)
+        //
+        //        self.addChildViewController(glkView!)
+        //        self.glkView!.didMoveToParentViewController(self)
+    }
+    
     
 }
