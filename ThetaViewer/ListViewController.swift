@@ -22,8 +22,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var yaw:Float = 0.0
     var roll:Float = 0.0
     var pitch:Float = 0.0
-    // var imageData:NSMutableData?
     var glkView:GlkViewController?
+    let titles = ["ここにタイトル", "title here!"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +73,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let view = UIImageView(frame: CGRectMake(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT))
         cell.setThumbnailImage(startGLK(view, row:indexPath.row))
-        cell.titleLabel.text = "ここにタイトル"
+        cell.titleLabel.text = titles[indexPath.row]
         
         return cell
     }
@@ -94,12 +94,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         glkView = GlkViewController(view!.frame, image:imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
         glkView!.view.frame = view!.frame
         glkView!.view.userInteractionEnabled = false
+
         return glkView!.view
-        //        self.view.addSubview(glkView!.view)
-        //
-        //        self.addChildViewController(glkView!)
-        //        self.glkView!.didMoveToParentViewController(self)
     }
-    
     
 }
