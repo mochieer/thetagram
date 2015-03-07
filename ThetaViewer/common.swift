@@ -20,6 +20,29 @@ func format(deg:Float) -> Float {
     return ret
 }
 
+func getPostureFromData(img:NSData?) -> Dictionary<String,Float> {
+    // 画像メタ情報のパース
+    var exif:RicohEXIF = RicohEXIF(NSData: img!)
+    
+    // 方位角
+    //     0 - 360
+    let yaw = isnan(exif.yaw) ? 0.0 : exif.yaw
+    
+    // 水平角
+    //     0 - 360
+    let roll = isnan(exif.roll) ? 0.0 : exif.roll
+    
+    // 仰角
+    //     -90 - 90
+    let pitch = isnan(exif.pitch) ? 0.0 : format(exif.pitch)
+    
+    println(String(format: "Initial = (%f, %f, %f)", yaw, roll, pitch))
+    
+    return ["yaw":yaw, "roll":roll, "pitch":pitch]
+}
+
+
+
 // Degrees to Radian
 func degreesToRadians(degrees:Double) -> Double {
     return degrees / 180.0 * M_PI

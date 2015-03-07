@@ -23,7 +23,7 @@ class ViewController: UIViewController, MyProtocol {
     var pitch:Float = 0.0
     var imageData:NSMutableData?
     var glkView:GlkViewController?
-
+    
     var initDeviceYaw:Float = 999.0
     var initDeviceRoll:Float = 999.0
     var initDevicePitch:Float = 999.0
@@ -61,36 +61,18 @@ class ViewController: UIViewController, MyProtocol {
         self.device.prot = self
         self.device.start()
     }
-
-    func getPostureFromData(img:NSData?) {
-        // 画像メタ情報のパース
-        var exif:RicohEXIF = RicohEXIF(NSData: img!)
-        
-        // 方位角
-        //     0 - 360
-        yaw = isnan(exif.yaw) ? 0.0 : exif.yaw
-        
-        // 水平角
-        //     0 - 360
-        roll = isnan(exif.roll) ? 0.0 : exif.roll
-        
-        // 仰角
-        //     -90 - 90
-        pitch = isnan(exif.pitch) ? 0.0 : format(exif.pitch)
-        
-        println(String(format: "Initial = (%f, %f, %f)", yaw, roll, pitch))
-    }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     func startGLK() {
+        //        glkView = GLView(frame: imageView!.frame)
         glkView = GlkViewController(imageView!.frame, image:imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
         // glkView!.setImage(imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
         
-        glkView!.view.frame = imageView!.frame
+        // glkView!.view.frame = imageView!.frame
         let msg = imageData == nil ? "nil" : "not nil"
         println("startGLK imageData: \(msg)")
         println(String(format:"startGLK: frame %f %f %f %f", imageView!.frame.origin.x, imageView!.frame.origin.y, imageView!.frame.size.width, imageView!.frame.size.height))
@@ -103,10 +85,8 @@ class ViewController: UIViewController, MyProtocol {
         navigationBackButton.layer.borderColor = UIColor.lightGrayColor().CGColor
         navigationBackButton.addTarget(self, action: "backPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         glkView!.view.addSubview(navigationBackButton)
-
         
         self.view.addSubview(glkView!.view)
-    
         self.addChildViewController(glkView!)
         self.glkView!.didMoveToParentViewController(self)
     }
@@ -134,7 +114,7 @@ class ViewController: UIViewController, MyProtocol {
         }
         glkView?.setPosture(yaw, roll: roll, pitch: pitch)
     }
-
+    
     func detect(att: CMAttitude) {
         var deviceYaw = Float(radiansToDegrees(att.yaw))
         var devicePitch = Float(radiansToDegrees(att.pitch))
@@ -166,7 +146,7 @@ class ViewController: UIViewController, MyProtocol {
         // println(String(format:"dev = (%.2f, %.2f, %.2f)", radiansToDegrees(att.yaw), radiansToDegrees(att.roll), radiansToDegrees(att.pitch)))
         // println(String(format:"diff = (%.2f, %.2f, %.2f)", radiansToDegrees(att.yaw), radiansToDegrees(att.roll), radiansToDegrees(att.pitch)))
         // println(String(format:"pic = (%.2f, %.2f, %.2f)", yaw, roll, pitch))
-
+        
         if (fabsf(diffYaw) > 1 && true) {
             if (diffYaw > 0) {
                 yaw -= sqrtf(diffYaw)
@@ -174,7 +154,7 @@ class ViewController: UIViewController, MyProtocol {
                 yaw += sqrtf(-diffYaw)
             }
         }
-
+        
         if (fabsf(diffRoll) > 1 && true) {
             if (diffRoll > 0) {
                 roll -= sqrtf(diffRoll)
@@ -192,7 +172,7 @@ class ViewController: UIViewController, MyProtocol {
         
         refleshGLK()
     }
- 
+    
 }
 
 

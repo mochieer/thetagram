@@ -12,6 +12,7 @@
 #import "theta-lib/lib-r-exif/ExifTags.h"
 #import "theta-lib/lib-r-exif/RicohEXIF.h"
 #import "lib/GLRenderView.h"
+#import "lib/GLView.h"
 #import "lib/glkViewController.h"
 
 #endif

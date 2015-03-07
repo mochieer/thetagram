@@ -58,6 +58,7 @@
 		FA87D95E1AA9A56A00B1D9C4 /* theta1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA87D95D1AA9A56A00B1D9C4 /* theta1.jpg */; };
 		FAC6ED691AAB4216002ED6AC /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6ED681AAB4216002ED6AC /* common.swift */; };
 		FAC6ED6B1AAB4261002ED6AC /* DevicePosture.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6ED6A1AAB4261002ED6AC /* DevicePosture.swift */; };
+		FAC6ED711AAB4AA8002ED6AC /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC6ED701AAB4AA7002ED6AC /* GLView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +162,8 @@
 		FA87D95D1AA9A56A00B1D9C4 /* theta1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theta1.jpg; sourceTree = "<group>"; };
 		FAC6ED681AAB4216002ED6AC /* common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = common.swift; sourceTree = "<group>"; };
 		FAC6ED6A1AAB4261002ED6AC /* DevicePosture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicePosture.swift; sourceTree = "<group>"; };
+		FAC6ED6F1AAB4A46002ED6AC /* GLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
+		FAC6ED701AAB4AA7002ED6AC /* GLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +190,8 @@
 		FA055AEF1AAAB0B600010E69 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				FAC6ED701AAB4AA7002ED6AC /* GLView.m */,
+				FAC6ED6F1AAB4A46002ED6AC /* GLView.h */,
 				FA055B151AAAB44700010E69 /* Constants.h */,
 				FA055B161AAAB44700010E69 /* glkViewController.h */,
 				FA055B171AAAB44700010E69 /* glkViewController.m */,
@@ -226,15 +231,15 @@
 				FA87D95A1AA99D3B00B1D9C4 /* Theta-Bridging-Header.h */,
 				FA87D8F61AA99A3500B1D9C4 /* theta-lib */,
 				FA87D83C1AA9723600B1D9C4 /* AppDelegate.swift */,
+				FAC6ED681AAB4216002ED6AC /* common.swift */,
 				178D10F61AAAD04500F02D03 /* ListViewController.swift */,
 				FA87D83E1AA9723600B1D9C4 /* ViewController.swift */,
 				FAC6ED6A1AAB4261002ED6AC /* DevicePosture.swift */,
-				FAC6ED681AAB4216002ED6AC /* common.swift */,
+				17B7D6B61AAB3870004F6AE2 /* ListViewCell.swift */,
 				FA87D8401AA9723600B1D9C4 /* Main.storyboard */,
 				FA87D8431AA9723600B1D9C4 /* Images.xcassets */,
 				FA87D8451AA9723600B1D9C4 /* LaunchScreen.xib */,
 				FA87D83A1AA9723600B1D9C4 /* Supporting Files */,
-				17B7D6B61AAB3870004F6AE2 /* ListViewCell.swift */,
 			);
 			path = ThetaViewer;
 			sourceTree = "<group>";
@@ -514,6 +519,7 @@
 				FA87D93E1AA99A3500B1D9C4 /* logger.cpp in Sources */,
 				17B7D6B71AAB3870004F6AE2 /* ListViewCell.swift in Sources */,
 				FA87D9481AA99A3500B1D9C4 /* ptpip_packets.cpp in Sources */,
+				FAC6ED711AAB4AA8002ED6AC /* GLView.m in Sources */,
 				FA87D9501AA99A3500B1D9C4 /* PtpIpSession.mm in Sources */,
 				FA87D9431AA99A3500B1D9C4 /* exceptions.cpp in Sources */,
 				FA87D93C1AA99A3500B1D9C4 /* RicohEXIF.mm in Sources */,
