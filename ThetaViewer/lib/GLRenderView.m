@@ -222,6 +222,14 @@ typedef enum : int {
     return;
 }
 
+-(void) setPosture: (float)yaw pitch:(float) pitch roll:(float) roll {
+    _yaw = yaw;
+    _roll = roll;
+    _pitch = pitch;
+    
+    return;
+}
+
 /**
  * Rotation inertia value setting method
  * @param kind Inertia value
