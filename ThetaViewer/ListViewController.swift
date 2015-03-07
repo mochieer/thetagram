@@ -14,6 +14,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // UI
     var tableView: UITableView!
+    var infoButton: UIButton!
     
     var device = DevicePosture()
     
@@ -37,6 +38,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var pitchBuff:[Float] = Array(count: 50, repeatedValue: 0.0)
     
     var buffIndex:Int = 0
+    
+    
+    /** layout property **/
+    let WINDOW_MARGIN: CGFloat = 20
+    let INFO_BUTTON_SIZE: CGSize = CGSizeMake(37, 37)
+    let INFO_MODAL_HEIGHT: CGSize = CGSizeMake(40, 40)
+    let INFO: CGSize = CGSizeMake(40, 40)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,10 +104,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     // cellを選択で詳細へ遷移
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vc: ViewController = ViewController()
-        self.navigationController!.pushViewController(vc, animated: true)
-    }
+    // ひとまず何もしない（画面タップでボタン隠すなどする場合ここに）
+    //func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //let vc: ViewController = ViewController()
+        //self.navigationController!.pushViewController(vc, animated: true)
+
+    //}
     
     func startGLK(view:UIImageView?, row:Int) -> UIView {
         let path:String = NSBundle.mainBundle().pathForResource("theta" + String(row+1), ofType: "jpg")!
@@ -109,9 +120,25 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         glkView = GlkViewController(view!.frame, image:imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
         glkView!.view.frame = view!.frame
-        glkView!.view.userInteractionEnabled = false
+        //glkView!.view.userInteractionEnabled = false
+        
+        // infoボタン
+        infoButton = UIButton(frame: CGRectMake(
+            WINDOW_WIDTH - WINDOW_MARGIN - INFO_BUTTON_SIZE.width,
+            WINDOW_HEIGHT - WINDOW_MARGIN - INFO_BUTTON_SIZE.height,
+            INFO_BUTTON_SIZE.width, INFO_BUTTON_SIZE.height))
+        infoButton.backgroundColor = UIColor.whiteColor()
+        infoButton.layer.cornerRadius = INFO_BUTTON_SIZE.width/2
+        infoButton.layer.borderColor = UIColor.lightGrayColor().CGColor
+        infoButton.addTarget(self, action: "infoPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        glkView!.view.addSubview(infoButton)
 
         return glkView!.view
+    }
+    
+    // infoボタン押下時
+    func infoPressed(sender: AnyObject) {
+        
     }
         
     func refleshGLK(diffx:Int, diffy:Int) {
