@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var imageView: UIImageView!
+    var imageView: UIImageView!
     
     let imageWidth:Int32 = 2048;
     let imageHeight:Int32 = 1024;
@@ -19,11 +19,6 @@ class ViewController: UIViewController {
     var pitch:Float = 0.0
     var imageData:NSMutableData?
     var glkView:GlkViewController?
-
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,15 +32,19 @@ class ViewController: UIViewController {
         
         // 方位角
         //     0 - 360
-        yaw = exif.yaw;
+        yaw = isnan(exif.yaw) ? 0.0 : exif.yaw;
         
         // 水平角
         //     0 - 360
-        roll = exif.roll;
+        roll = isnan(exif.roll) ? 0.0 : exif.roll;
         
         // 仰角
         //     -90 - 90
-        pitch = exif.pitch
+        pitch = isnan(exif.pitch) ? 0.0 :  exif.pitch
+        
+        imageView = UIImageView(frame: CGRectMake(0, 0, 600, 600))
+        
+        self.view.addSubview(imageView)
        
         startGLK()
     }
@@ -63,25 +62,10 @@ class ViewController: UIViewController {
         println(String(format:"startGLK: frame %f %f %f %f", imageView!.frame.origin.x, imageView!.frame.origin.y, imageView!.frame.size.width, imageView!.frame.size.height))
     
         self.view.addSubview(glkView!.view)
-        
-    
-//    UIButton *myButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    myButton.frame = _closeButton.frame;
-//    [myButton setTitle:_closeButton.currentTitle forState:UIControlStateNormal];
-//    [myButton addTarget:self action:@selector(myCloseClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [glkViewController.view addSubview:myButton];
-    
-//    UIButton *myConfigButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    myConfigButton.frame = _configButton.frame;
-//    [myConfigButton setTitle:_configButton.currentTitle forState:UIControlStateNormal];
-//    [myConfigButton addTarget:self action:@selector(myConfig:) forControlEvents:UIControlEventTouchUpInside];
-//    [glkViewController.view addSubview:myConfigButton];
     
         self.addChildViewController(glkView!)
         glkView!.didMoveToParentViewController(self)
         
-//    [self addChildViewController:glkViewController];
-//    [glkViewController didMoveToParentViewController:self];
     }
 }
 
