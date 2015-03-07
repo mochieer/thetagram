@@ -86,6 +86,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func startGLK(view:UIImageView?, row:Int) -> UIView {
         let path:String = NSBundle.mainBundle().pathForResource("theta" + String(row+1), ofType: "jpg")!
+        println("Read file =  \(path)")
+
         let imageData = NSMutableData(contentsOfFile: path)!
         getPostureFromData(imageData)
         
