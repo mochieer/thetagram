@@ -56,6 +56,8 @@
 		FA87D9571AA99A3500B1D9C4 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FA87D9381AA99A3500B1D9C4 /* README */; };
 		FA87D95C1AA9A01300B1D9C4 /* theta.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA87D95B1AA9A01300B1D9C4 /* theta.jpg */; };
 		FA87D95E1AA9A56A00B1D9C4 /* theta1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA87D95D1AA9A56A00B1D9C4 /* theta1.jpg */; };
+		FAC6ED691AAB4216002ED6AC /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6ED681AAB4216002ED6AC /* common.swift */; };
+		FAC6ED6B1AAB4261002ED6AC /* DevicePosture.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6ED6A1AAB4261002ED6AC /* DevicePosture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,6 +159,8 @@
 		FA87D95A1AA99D3B00B1D9C4 /* Theta-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Theta-Bridging-Header.h"; sourceTree = "<group>"; };
 		FA87D95B1AA9A01300B1D9C4 /* theta.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theta.jpg; sourceTree = "<group>"; };
 		FA87D95D1AA9A56A00B1D9C4 /* theta1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theta1.jpg; sourceTree = "<group>"; };
+		FAC6ED681AAB4216002ED6AC /* common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = common.swift; sourceTree = "<group>"; };
+		FAC6ED6A1AAB4261002ED6AC /* DevicePosture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicePosture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +228,8 @@
 				FA87D83C1AA9723600B1D9C4 /* AppDelegate.swift */,
 				178D10F61AAAD04500F02D03 /* ListViewController.swift */,
 				FA87D83E1AA9723600B1D9C4 /* ViewController.swift */,
+				FAC6ED6A1AAB4261002ED6AC /* DevicePosture.swift */,
+				FAC6ED681AAB4216002ED6AC /* common.swift */,
 				FA87D8401AA9723600B1D9C4 /* Main.storyboard */,
 				FA87D8431AA9723600B1D9C4 /* Images.xcassets */,
 				FA87D8451AA9723600B1D9C4 /* LaunchScreen.xib */,
@@ -485,6 +491,8 @@
 				FA87D9401AA99A3500B1D9C4 /* basictypes.cpp in Sources */,
 				FA055B211AAAB44700010E69 /* UVSphere.m in Sources */,
 				FA87D94E1AA99A3500B1D9C4 /* PtpIpObjectInfo.mm in Sources */,
+				FAC6ED691AAB4216002ED6AC /* common.swift in Sources */,
+				FAC6ED6B1AAB4261002ED6AC /* DevicePosture.swift in Sources */,
 				FA87D94A1AA99A3500B1D9C4 /* PtpIpDeviceInfo.mm in Sources */,
 				FA87D94C1AA99A3500B1D9C4 /* PtpIpInitiator.mm in Sources */,
 				FA87D93A1AA99A3500B1D9C4 /* ExifTags.m in Sources */,
