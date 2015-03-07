@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 func rad2deg(rad:Float) -> Float {
     return Float(180.0 * Double(rad) / M_PI)
@@ -34,12 +35,36 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        var path:String = NSBundle.mainBundle().pathForResource("theta2", ofType: "jpg")!
-        imageData = NSMutableData(contentsOfFile: path)!
         
-       
+        //        let path = NSBundle.mainBundle().pathForResource("theta", ofType: "jpg")!
+        let path = NSBundle.mainBundle().pathForResource("movie", ofType: "mp4")!
+        let fileURL = NSURL(fileURLWithPath: path)!
+        let asset = AVURLAsset(URL: fileURL, options: nil)!
+        
+        println(path)
+        println(fileURL)
+        println(asset.tracksWithMediaCharacteristic(AVMediaTypeVideo).count)
+        //        if (asset.tracksWithMediaCharacteristic(AVMediaTypeVideo).count > 0) {
+        //        if(true){
+        var imageGen = AVAssetImageGenerator(asset: asset)
+        imageGen.appliesPreferredTrackTransform = true
+        
+        var durationSeconds:Float64 = CMTimeGetSeconds(asset.duration)
+        var midpoint:CMTime = CMTimeMakeWithSeconds(durationSeconds/2.0, 600)
+        var actualTime:CMTime = CMTimeMake(0, 0)
+        var error:NSError?
+        var halfWayImageRef:CGImageRef = imageGen.copyCGImageAtTime(midpoint, actualTime: &actualTime, error: &error)
+        var image = UIImage(CGImage: halfWayImageRef)
+        var data = UIImagePNGRepresentation(image)
+        imageData = NSMutableData(data: data)
+        //            println(imageData!)
+        //        }else{
+        //            let path = NSBundle.mainBundle().pathForResource("theta", ofType: "jpg")!
+        //            imageData = NSMutableData(contentsOfFile: path)!
+        //        }
+        
         // 画像メタ情報のパース
-        var exif:RicohEXIF = RicohEXIF(NSData: imageData);
+        var exif:RicohEXIF = RicohEXIF(NSData: imageData!);
         
         // 方位角
         //     0 - 360
@@ -60,22 +85,23 @@ class ViewController: UIViewController {
         
         startGLK()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     func startGLK() {
-        glkView = GlkViewController(imageView!.frame, image:imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
-        glkView!.setImage(imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
+        glkView = GlkViewController(imageView!.frame, image:imageData!, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
+        // glkView!.setImage(imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
         
         glkView!.view.frame = imageView!.frame
-        println("startGLK imageData: \(NSString(data: imageData!, encoding:NSUTF8StringEncoding))")
+        var msg = (imageData == nil) ? "nil" : "not nil"
+        println("startGLK imageData: \(msg))")
         println(String(format:"startGLK: frame %f %f %f %f", imageView!.frame.origin.x, imageView!.frame.origin.y, imageView!.frame.size.width, imageView!.frame.size.height))
-    
+        
         self.view.addSubview(glkView!.view)
-    
+        
         self.addChildViewController(glkView!)
         glkView!.didMoveToParentViewController(self)
         

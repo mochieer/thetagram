@@ -12,6 +12,8 @@
 		FA055B1F1AAAB44700010E69 /* GLRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA055B191AAAB44700010E69 /* GLRenderView.m */; };
 		FA055B211AAAB44700010E69 /* UVSphere.m in Sources */ = {isa = PBXBuildFile; fileRef = FA055B1D1AAAB44700010E69 /* UVSphere.m */; };
 		FA055B231AAADE9E00010E69 /* theta2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA055B221AAADE9E00010E69 /* theta2.jpg */; };
+		FA4042871AAAF0FD0062BF2A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4042861AAAF0FD0062BF2A /* AVFoundation.framework */; };
+		FA4042881AAAF1C70062BF2A /* movie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FA4042851AAAF0670062BF2A /* movie.mp4 */; };
 		FA87D83D1AA9723600B1D9C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87D83C1AA9723600B1D9C4 /* AppDelegate.swift */; };
 		FA87D83F1AA9723600B1D9C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87D83E1AA9723600B1D9C4 /* ViewController.swift */; };
 		FA87D8421AA9723600B1D9C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA87D8401AA9723600B1D9C4 /* Main.storyboard */; };
@@ -75,7 +77,8 @@
 		FA055B1C1AAAB44700010E69 /* UVSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UVSphere.h; sourceTree = "<group>"; };
 		FA055B1D1AAAB44700010E69 /* UVSphere.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UVSphere.m; sourceTree = "<group>"; };
 		FA055B221AAADE9E00010E69 /* theta2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theta2.jpg; sourceTree = "<group>"; };
-		FA4042841AAAE76E0062BF2A /* movie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = movie.mp4; sourceTree = "<group>"; };
+		FA4042851AAAF0670062BF2A /* movie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = movie.mp4; sourceTree = "<group>"; };
+		FA4042861AAAF0FD0062BF2A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FA87D8371AA9723600B1D9C4 /* ThetaViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThetaViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA87D83B1AA9723600B1D9C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA87D83C1AA9723600B1D9C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -159,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA4042871AAAF0FD0062BF2A /* AVFoundation.framework in Frameworks */,
 				FA87D8611AA976F100B1D9C4 /* ImageIO.framework in Frameworks */,
 				FA87D85F1AA976E800B1D9C4 /* libiconv.dylib in Frameworks */,
 			);
@@ -191,6 +195,7 @@
 		FA87D82E1AA9723600B1D9C4 = {
 			isa = PBXGroup;
 			children = (
+				FA4042861AAAF0FD0062BF2A /* AVFoundation.framework */,
 				FA87D8601AA976F100B1D9C4 /* ImageIO.framework */,
 				FA87D85E1AA976E800B1D9C4 /* libiconv.dylib */,
 				FA87D8391AA9723600B1D9C4 /* ThetaViewer */,
@@ -228,7 +233,7 @@
 		FA87D83A1AA9723600B1D9C4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FA4042841AAAE76E0062BF2A /* movie.mp4 */,
+				FA4042851AAAF0670062BF2A /* movie.mp4 */,
 				FA055B221AAADE9E00010E69 /* theta2.jpg */,
 				FA87D95D1AA9A56A00B1D9C4 /* theta1.jpg */,
 				FA87D95B1AA9A01300B1D9C4 /* theta.jpg */,
@@ -442,6 +447,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA4042881AAAF1C70062BF2A /* movie.mp4 in Resources */,
 				FA87D9531AA99A3500B1D9C4 /* README in Resources */,
 				FA87D93B1AA99A3500B1D9C4 /* README in Resources */,
 				FA87D95E1AA9A56A00B1D9C4 /* theta1.jpg in Resources */,
