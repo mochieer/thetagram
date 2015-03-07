@@ -208,6 +208,7 @@ typedef enum : int {
     
     mTextureInfo=[GLKTextureLoader textureWithContentsOfData:data options:nil error:&error];
     name = mTextureInfo.name;
+    printf("texture name = %d\n",name);
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, name);

@@ -10,14 +10,15 @@ import UIKit
 import CoreMotion
 
 
-func rad2deg(rad:Float) -> Float {
-    return Float(180.0 * Double(rad) / M_PI)
-}
-
 func format(deg:Float) -> Float {
-    let unit:Float = 180
-    println(Int(deg / unit))
+    let unit:Float = 360
+    // println(Int(deg / unit))
     var ret:Float = deg - unit * Float(Int(deg/unit))
+    
+    while(ret > 0.0){
+        ret -= 90.0
+    }
+    
     return ret
 }
 
@@ -50,23 +51,7 @@ class ViewController: UIViewController, MyProtocol {
         var path:String = NSBundle.mainBundle().pathForResource("theta2", ofType: "jpg")!
         imageData = NSMutableData(contentsOfFile: path)!
         
-       
-        // 画像メタ情報のパース
-        var exif:RicohEXIF = RicohEXIF(NSData: imageData);
-        
-        // 方位角
-        //     0 - 360
-        yaw = isnan(exif.yaw) ? 0.0 : exif.yaw;
-        
-        // 水平角
-        //     0 - 360
-        roll = isnan(exif.roll) ? 0.0 : exif.roll;
-        
-        // 仰角
-        //     -90 - 90
-        pitch = isnan(exif.pitch) ? 0.0 : format(exif.pitch)
-        
-        println(String(format: "%f, %f, %f", yaw, roll, pitch))
+        getPostureFromData(imageData)
         
         imageView = UIImageView(frame: CGRectMake(0, 0, 600, 600))
         self.view.addSubview(imageView)
@@ -78,6 +63,25 @@ class ViewController: UIViewController, MyProtocol {
         self.device.start()
     }
 
+    func getPostureFromData(img:NSData?) {
+        // 画像メタ情報のパース
+        var exif:RicohEXIF = RicohEXIF(NSData: img!)
+        
+        // 方位角
+        //     0 - 360
+        yaw = isnan(exif.yaw) ? 0.0 : exif.yaw
+        
+        // 水平角
+        //     0 - 360
+        roll = isnan(exif.roll) ? 0.0 : exif.roll
+        
+        // 仰角
+        //     -90 - 90
+        pitch = isnan(exif.pitch) ? 0.0 : format(exif.pitch)
+        
+        println(String(format: "Initial = (%f, %f, %f)", yaw, roll, pitch))
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -85,10 +89,11 @@ class ViewController: UIViewController, MyProtocol {
 
     func startGLK() {
         glkView = GlkViewController(imageView!.frame, image:imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
-        glkView!.setImage(imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
+        // glkView!.setImage(imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
         
         glkView!.view.frame = imageView!.frame
-        println("startGLK imageData: \(NSString(data: imageData!, encoding:NSUTF8StringEncoding))")
+        let msg = imageData == nil ? "nil" : "not nil"
+        println("startGLK imageData: \(msg)")
         println(String(format:"startGLK: frame %f %f %f %f", imageView!.frame.origin.x, imageView!.frame.origin.y, imageView!.frame.size.width, imageView!.frame.size.height))
         
         self.view.addSubview(glkView!.view)
@@ -143,9 +148,10 @@ class ViewController: UIViewController, MyProtocol {
         var diffYaw = deviceYaw - getAverage(yawBuff)
         var diffRoll = deviceRoll - getAverage(rollBuff)
         var diffPitch = devicePitch - getAverage(pitchBuff)
-        println(String(format:"dev = (%.2f, %.2f, %.2f)", radiansToDegrees(att.yaw), radiansToDegrees(att.roll), radiansToDegrees(att.pitch)))
-        println(String(format:"diff = (%.2f, %.2f, %.2f)", radiansToDegrees(att.yaw), radiansToDegrees(att.roll), radiansToDegrees(att.pitch)))
-        println(String(format:"pic = (%.2f, %.2f, %.2f)", yaw, roll, pitch))
+        // TODO: stdout
+        // println(String(format:"dev = (%.2f, %.2f, %.2f)", radiansToDegrees(att.yaw), radiansToDegrees(att.roll), radiansToDegrees(att.pitch)))
+        // println(String(format:"diff = (%.2f, %.2f, %.2f)", radiansToDegrees(att.yaw), radiansToDegrees(att.roll), radiansToDegrees(att.pitch)))
+        // println(String(format:"pic = (%.2f, %.2f, %.2f)", yaw, roll, pitch))
 
         if (fabsf(diffYaw) > 1 && true) {
             if (diffYaw > 0) {
@@ -177,16 +183,6 @@ class ViewController: UIViewController, MyProtocol {
 
 
 
-
-
-
-
-
-
-
-
-
-
 protocol MyProtocol {
     func detect(CMAttitude)
 }
@@ -202,7 +198,7 @@ class DevicePosture {
 
     init() {
         self.motionManager = CMMotionManager()
-        println("thresold = \(self.thresold)")
+        // println("thresold = \(self.thresold)")
     }
     func start() {
         // Initialize MotionManager
@@ -233,8 +229,6 @@ class DevicePosture {
         }
     }
 }
-
-
 
 
 
