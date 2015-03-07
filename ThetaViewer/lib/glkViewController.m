@@ -43,4 +43,8 @@
 -(void)setPosture: (float)yaw roll:(float)roll pitch:(float)pitch {
     [_glRenderView setPosture:yaw pitch:pitch roll:roll];
 }
+
+-(void)setRotation: (int)_diffx diffy:(int)_diffy {
+    [_glRenderView rotate:_diffx diffy:_diffy];
+}
 @end
