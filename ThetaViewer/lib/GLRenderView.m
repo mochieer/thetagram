@@ -109,6 +109,8 @@ typedef enum : int {
     int panLastDiffX;
     int panLastDiffY;
     double inertiaRatio;
+    
+    GLuint tex_name;
 }
 
 // opengl shader and program
@@ -171,6 +173,8 @@ typedef enum : int {
     
     // NSLog(@"initwithframe frame: x: %f y: %f width %f height %f", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
     
+    tex_name = 0;
+    
     return self;
 }
 
@@ -207,14 +211,14 @@ typedef enum : int {
 -(void) setTexture:(NSMutableData*)data width:(int)width height:(int)height yaw:(float)yaw pitch:(float) pitch roll:(float) roll {
     
     NSError *error;
-    GLuint name;
+    // GLuint name;
     
     mTextureInfo=[GLKTextureLoader textureWithContentsOfData:data options:nil error:&error];
-    name = mTextureInfo.name;
-    printf("texture name = %d\n",name);
+    tex_name = mTextureInfo.name;
+    printf("texture name = %d\n",tex_name);
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, name);
+    glBindTexture(GL_TEXTURE_2D, tex_name);
     
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -224,6 +228,16 @@ typedef enum : int {
     _pitch = pitch;
     
     return;
+}
+-(void) dealloc {
+    [self deleteTexture];
+}
+-(void) deleteTexture {
+    // ここに終了コードを書く
+    printf("GLRenderView::deleteTexture\n");
+    if (tex_name > 0) {
+        glDeleteTextures(1, &tex_name);
+    }
 }
 
 -(void) setPosture: (float)yaw pitch:(float) pitch roll:(float) roll {
