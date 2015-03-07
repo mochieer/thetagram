@@ -75,6 +75,7 @@
 		FA055B1C1AAAB44700010E69 /* UVSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UVSphere.h; sourceTree = "<group>"; };
 		FA055B1D1AAAB44700010E69 /* UVSphere.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UVSphere.m; sourceTree = "<group>"; };
 		FA055B221AAADE9E00010E69 /* theta2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theta2.jpg; sourceTree = "<group>"; };
+		FA4042841AAAE76E0062BF2A /* movie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = movie.mp4; sourceTree = "<group>"; };
 		FA87D8371AA9723600B1D9C4 /* ThetaViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThetaViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA87D83B1AA9723600B1D9C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA87D83C1AA9723600B1D9C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -227,6 +228,7 @@
 		FA87D83A1AA9723600B1D9C4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FA4042841AAAE76E0062BF2A /* movie.mp4 */,
 				FA055B221AAADE9E00010E69 /* theta2.jpg */,
 				FA87D95D1AA9A56A00B1D9C4 /* theta1.jpg */,
 				FA87D95B1AA9A01300B1D9C4 /* theta.jpg */,
