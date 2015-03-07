@@ -16,6 +16,6 @@
 -(void) setPosture: (float)yaw pitch:(float) pitch roll:(float) roll;
 -(void) setInertia:(int)kind;
 -(void) rotate:(int) diffx diffy:(int) diffy;
-
+-(void) deleteTexture;
 @end
 
