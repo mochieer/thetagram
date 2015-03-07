@@ -428,7 +428,7 @@
             return YES;
         }
     }
-    LOG_WARN(@"IFD::EXIF::MakerNote is not found.");
+    // LOG_WARN(@"IFD::EXIF::MakerNote is not found.");
     return NO;
 }
 

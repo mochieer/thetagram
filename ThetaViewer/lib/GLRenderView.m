@@ -169,7 +169,7 @@ typedef enum : int {
         shell = [[UVSphere alloc] init:SHELL_RADIUS divide:SHELL_DIVIDE];
     }
     
-    NSLog(@"initwithframe frame: x: %f y: %f width %f height %f", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
+    // NSLog(@"initwithframe frame: x: %f y: %f width %f height %f", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
     
     return self;
 }
@@ -190,7 +190,7 @@ typedef enum : int {
     
     pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGestureHandler:)];
     [self addGestureRecognizer:pinchGestureRecognizer];
-    NSLog(@"add pinchGesture.");
+    //NSLog(@"add pinchGesture.");
 
     return;
 }

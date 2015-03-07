@@ -25,8 +25,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var yaw:Float = 0.0
     var roll:Float = 0.0
     var pitch:Float = 0.0
-    var imageData:NSMutableData?
     var glkView:GlkViewController?
+    let titles = ["ここにタイトル", "title here!", "うぇーい！"]
     
     var initDeviceYaw:Float = 999.0
     var initDeviceRoll:Float = 999.0
@@ -40,12 +40,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        var path:String = NSBundle.mainBundle().pathForResource("theta2", ofType: "jpg")!
-        imageData = NSMutableData(contentsOfFile: path)!
-        
-        getPostureFromData(imageData)
-        
+
         // navigationbarを非表示
         self.navigationController?.navigationBarHidden = true
         
@@ -81,7 +76,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 3
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -93,8 +88,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) as ListViewCell
         
         let view = UIImageView(frame: CGRectMake(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT))
-        cell.setThumbnailImage(startGLK(view))
-        cell.titleLabel.text = "ここにタイトル"
+        cell.setThumbnailImage(startGLK(view, row:indexPath.row))
+        cell.titleLabel.text = titles[indexPath.row]
         
         return cell
     }
@@ -105,25 +100,23 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationController!.pushViewController(vc, animated: true)
     }
     
-    func startGLK(view:UIImageView?) -> UIView {
+    func startGLK(view:UIImageView?, row:Int) -> UIView {
+        let path:String = NSBundle.mainBundle().pathForResource("theta" + String(row+1), ofType: "jpg")!
+        println("Read file =  \(path)")
+
+        let imageData = NSMutableData(contentsOfFile: path)!
+        getPostureFromData(imageData)
+        
         glkView = GlkViewController(view!.frame, image:imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
         glkView!.view.frame = view!.frame
         glkView!.view.userInteractionEnabled = false
+
         return glkView!.view
-        //        self.view.addSubview(glkView!.view)
-        //
-        //        self.addChildViewController(glkView!)
-        //        self.glkView!.didMoveToParentViewController(self)
     }
-    
-    
-    
+        
     func refleshGLK(diffx:Int, diffy:Int) {
         glkView?.setRotation(Int32(diffx), diffy: Int32(diffy))
-        
     }
-
-    
     
     func detect(att: CMAttitude) {
         var deviceYaw = Float(radiansToDegrees(att.yaw))
