@@ -25,6 +25,7 @@ class ViewController: UIViewController, MyProtocol {
     
     var device = DevicePosture()
     var imageView: UIImageView!
+    var navigationBackButton: UIButton!
     
     let imageWidth:Int32 = 2048;
     let imageHeight:Int32 = 1024;
@@ -43,6 +44,16 @@ class ViewController: UIViewController, MyProtocol {
     var pitchBuff:[Float] = Array(count: 50, repeatedValue: 0.0)
     
     var buffIndex:Int = 0
+    
+    /** layout property **/
+    
+    let WINDOW_MARGIN: CGFloat = 10
+    let STATUSBAR_HEIGHT: CGFloat = 20
+    let WINDOW_WIDTH: CGFloat = UIScreen.mainScreen().bounds.width
+    let WINDOW_HEIGHT: CGFloat = UIScreen.mainScreen().bounds.height
+    let BUTTON_SIZE: CGSize = CGSizeMake(40, 40)
+    let BROWSER_BUTTON_SIZE: CGSize = CGSizeMake(50, 30)
+    let INDICATOR_SIZE: CGSize = CGSizeMake(44, 44)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,10 +102,25 @@ class ViewController: UIViewController, MyProtocol {
         println("startGLK imageData: \(NSString(data: imageData!, encoding:NSUTF8StringEncoding))")
         println(String(format:"startGLK: frame %f %f %f %f", imageView!.frame.origin.x, imageView!.frame.origin.y, imageView!.frame.size.width, imageView!.frame.size.height))
         
+        // 戻るボタン
+        navigationBackButton = UIButton(frame: CGRectMake( WINDOW_MARGIN, STATUSBAR_HEIGHT + WINDOW_MARGIN, BUTTON_SIZE.width, BUTTON_SIZE.height))
+        navigationBackButton.backgroundColor = UIColor.whiteColor()
+        navigationBackButton.layer.cornerRadius = BUTTON_SIZE.width/2
+        navigationBackButton.layer.borderWidth = 0.5
+        navigationBackButton.layer.borderColor = UIColor.lightGrayColor().CGColor
+        navigationBackButton.addTarget(self, action: "backPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        glkView!.view.addSubview(navigationBackButton)
+
+        
         self.view.addSubview(glkView!.view)
     
         self.addChildViewController(glkView!)
         self.glkView!.didMoveToParentViewController(self)
+    }
+    
+    // 戻るボタン押下時
+    func backPressed(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func refleshGLK() {
