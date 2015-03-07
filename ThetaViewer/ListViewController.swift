@@ -14,6 +14,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // UI
     var tableView: UITableView!
+    var infoButton: UIButton!
+    var modalView: ModalView!
+    var unvisibleLayer: UIButton!
     
     var device = DevicePosture()
     
@@ -27,6 +30,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var pitch:Float = 0.0
     var glkView:GlkViewController?
     let titles = ["ここにタイトル", "title here!", "うぇーい！", "4", "5", "6"]
+    let names = ["_akny", "_akny", "_akny", "_akny", "_akny"]
+    let dates = ["2015/3/8 14:08", "2015/3/7 20:19", "2015/3/7 12:10", "2015/3/7 12:10", "2015/3/7 12:10"]
+    let places = ["由比ヶ浜海岸", "東京ミッドタウン", "浅草大久保氏邸", "浅草大久保氏邸", "浅草大久保氏邸"]
+    let comments = ["春の由比ヶ浜海岸。浜大根の花が満開でとてもきれいでした！！", "ほげ", "ふが", "春の由比ヶ浜海岸。浜大根の花が満開でとてもきれいでした！！", "春の由比ヶ浜海岸。浜大根の花が満開でとてもきれいでした！！"]
     
     var initDeviceYaw:Float = 999.0
     var initDeviceRoll:Float = 999.0
@@ -37,6 +44,15 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var pitchBuff:[Float] = Array(count: 50, repeatedValue: 0.0)
     
     var buffIndex:Int = 0
+    
+    var openedRow = 0
+    
+    
+    /** layout property **/
+    let WINDOW_MARGIN: CGFloat = 20
+    let MODAL_HEIGHT: CGFloat = 110
+    let INFO_BUTTON_SIZE: CGSize = CGSizeMake(37, 37)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,18 +109,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let view = UIImageView(frame: CGRectMake(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT))
         cell.setThumbnailImage(startGLK(view, row:indexPath.row))
-        cell.titleLabel.text = titles[indexPath.row]
+        //cell.titleLabel.text = titles[indexPath.row]
         
         return cell
     }
     
-    // cellを選択で詳細へ遷移
+    // cellを選択でモーダルを閉じる
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vc: ViewController = ViewController()
-        self.navigationController!.pushViewController(vc, animated: true)
     }
     
     func startGLK(view:UIImageView?, row:Int) -> UIView {
+        openedRow = row
         let path:String = NSBundle.mainBundle().pathForResource("theta" + String(row+1), ofType: "jpg")!
         println("Read file =  \(path)")
 
@@ -113,11 +128,60 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         glkView = GlkViewController(view!.frame, image:imageData, width:imageWidth, height:imageHeight, yaw:yaw, roll:roll, pitch:pitch)
         glkView!.view.frame = view!.frame
-        glkView!.view.userInteractionEnabled = false
+        //glkView!.view.userInteractionEnabled = false
+        
+        // infoボタン
+        var imageNormal = UIImage(named: "ic_info")
+        var imageTapped = UIImage(named: "ic_info_tapped")
+        infoButton = UIButton(frame: CGRectMake(
+            WINDOW_WIDTH - WINDOW_MARGIN - INFO_BUTTON_SIZE.width,
+            WINDOW_HEIGHT - WINDOW_MARGIN - INFO_BUTTON_SIZE.height,
+            INFO_BUTTON_SIZE.width, INFO_BUTTON_SIZE.height))
+        infoButton.addTarget(self, action: "infoTouchUp:", forControlEvents: UIControlEvents.TouchUpInside)
+        infoButton.setImage(imageNormal, forState: .Normal)
+        infoButton.setImage(imageTapped, forState: .Highlighted)
+        glkView!.view.addSubview(infoButton)
 
         return glkView!.view
     }
-        
+    
+    // infoボタン押下時
+    func infoTouchUp(sender: AnyObject) {
+        unvisibleLayer = UIButton(frame: CGRectMake(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT))
+        unvisibleLayer.alpha = 1.0
+        unvisibleLayer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0)
+        unvisibleLayer.addTarget(self, action: "closeModal:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(unvisibleLayer)
+        openModal(names[openedRow], place: places[openedRow], date: dates[openedRow], comment: comments[openedRow])
+
+    }
+    
+    func openModal(user:String, place:String, date:String, comment:String) {
+        modalView = ModalView(frame: CGRectMake(
+            0, WINDOW_HEIGHT, WINDOW_WIDTH, MODAL_HEIGHT))
+        modalView.setUserName(user)
+        modalView.setDate(date)
+        modalView.setPlace(place)
+        modalView.setComment(comment)
+        self.view.addSubview(modalView)
+        modalView.alpha = 1.0
+        infoButton.alpha = 0.0
+        UIView.animateWithDuration(0.3, animations: {() -> Void in
+            self.modalView.center = CGPoint(x: self.WINDOW_WIDTH/2, y: self.WINDOW_HEIGHT - (self.MODAL_HEIGHT/2));
+            }, completion: {(Bool) -> Void in
+        })
+    }
+    
+    func closeModal(sender: AnyObject) {
+        infoButton.alpha = 1.0
+        unvisibleLayer.alpha = 0.0
+        UIView.animateWithDuration(0.3, animations: {() -> Void in
+            self.modalView.center = CGPoint(x: self.WINDOW_WIDTH/2, y: self.WINDOW_HEIGHT + (self.MODAL_HEIGHT/2));
+            }, completion: {(Bool) -> Void in
+                self.modalView.alpha = 0.0
+        })
+    }
+
     func refleshGLK(diffx:Int, diffy:Int) {
         glkView?.setRotation(Int32(diffx), diffy: Int32(diffy))
     }

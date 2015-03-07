@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		178D10F71AAAD04500F02D03 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178D10F61AAAD04500F02D03 /* ListViewController.swift */; };
 		17B7D6B71AAB3870004F6AE2 /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B7D6B61AAB3870004F6AE2 /* ListViewCell.swift */; };
+		47DD65AF1AAB8AF100A82405 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DD65AE1AAB8AF100A82405 /* Modal.swift */; };
 		FA055B1E1AAAB44700010E69 /* glkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA055B171AAAB44700010E69 /* glkViewController.m */; };
 		FA055B1F1AAAB44700010E69 /* GLRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA055B191AAAB44700010E69 /* GLRenderView.m */; };
 		FA055B211AAAB44700010E69 /* UVSphere.m in Sources */ = {isa = PBXBuildFile; fileRef = FA055B1D1AAAB44700010E69 /* UVSphere.m */; };
@@ -76,6 +77,7 @@
 /* Begin PBXFileReference section */
 		178D10F61AAAD04500F02D03 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		17B7D6B61AAB3870004F6AE2 /* ListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
+		47DD65AE1AAB8AF100A82405 /* Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
 		FA055B151AAAB44700010E69 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		FA055B161AAAB44700010E69 /* glkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glkViewController.h; sourceTree = "<group>"; };
 		FA055B171AAAB44700010E69 /* glkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glkViewController.m; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				FA87D83E1AA9723600B1D9C4 /* ViewController.swift */,
 				FAC6ED6A1AAB4261002ED6AC /* DevicePosture.swift */,
 				17B7D6B61AAB3870004F6AE2 /* ListViewCell.swift */,
+				47DD65AE1AAB8AF100A82405 /* Modal.swift */,
 				FA87D8401AA9723600B1D9C4 /* Main.storyboard */,
 				FA87D8431AA9723600B1D9C4 /* Images.xcassets */,
 				FA87D8451AA9723600B1D9C4 /* LaunchScreen.xib */,
@@ -521,6 +524,7 @@
 				FA87D9461AA99A3500B1D9C4 /* ptpip.cpp in Sources */,
 				FA87D9391AA99A3500B1D9C4 /* ExifRawData.mm in Sources */,
 				FA87D9491AA99A3500B1D9C4 /* ptpip_packets_impl.cpp in Sources */,
+				47DD65AF1AAB8AF100A82405 /* Modal.swift in Sources */,
 				FA87D9441AA99A3500B1D9C4 /* int128_t.cpp in Sources */,
 				FA87D9511AA99A3500B1D9C4 /* PtpIpStorageInfo.mm in Sources */,
 				FA055B1F1AAAB44700010E69 /* GLRenderView.m in Sources */,
