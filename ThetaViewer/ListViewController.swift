@@ -29,11 +29,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var roll:Float = 0.0
     var pitch:Float = 0.0
     var glkView:GlkViewController?
-    let titles = ["ここにタイトル", "title here!", "うぇーい！"]
-    let names = ["_akny", "_akny", "_akny"]
-    let dates = ["2015/3/8 14:08", "2015/3/7 20:19", "2015/3/7 12:10"]
-    let places = ["由比ヶ浜海岸", "東京ミッドタウン", "浅草大久保氏邸"]
-    let comments = ["春の由比ヶ浜海岸。浜大根の花が満開でとてもきれいでした！！", "ほげ", "ふが"]
+    let titles = ["ここにタイトル", "title here!", "うぇーい！", "4", "5", "6"]
+    let names = ["_akny", "_akny", "_akny", "_akny", "_akny"]
+    let dates = ["2015/3/8 14:08", "2015/3/7 20:19", "2015/3/7 12:10", "2015/3/7 12:10", "2015/3/7 12:10"]
+    let places = ["由比ヶ浜海岸", "東京ミッドタウン", "浅草大久保氏邸", "浅草大久保氏邸", "浅草大久保氏邸"]
+    let comments = ["春の由比ヶ浜海岸。浜大根の花が満開でとてもきれいでした！！", "ほげ", "ふが", "春の由比ヶ浜海岸。浜大根の花が満開でとてもきれいでした！！", "春の由比ヶ浜海岸。浜大根の花が満開でとてもきれいでした！！"]
     
     var initDeviceYaw:Float = 999.0
     var initDeviceRoll:Float = 999.0
