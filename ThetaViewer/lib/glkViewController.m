@@ -39,4 +39,8 @@
 -(void)setImage:(NSMutableData *)imageData width:(int)width height:(int)height yaw:(float)yaw roll:(float)roll pitch:(float)pitch {
     [_glRenderView setTexture:imageData width:width height:height yaw:yaw pitch:pitch roll:roll];
 }
+
+-(void)setPosture: (float)yaw roll:(float)roll pitch:(float)pitch {
+    [_glRenderView setPosture:yaw pitch:pitch roll:roll];
+}
 @end
