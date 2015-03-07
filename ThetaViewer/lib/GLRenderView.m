@@ -111,6 +111,9 @@ typedef enum : int {
     double inertiaRatio;
     
     GLuint tex_name;
+    
+    BOOL stopped;
+    UIButton* playButton;
 }
 
 // opengl shader and program
@@ -175,7 +178,29 @@ typedef enum : int {
     
     tex_name = 0;
     
+    stopped = false;
+    
+    playButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    CGRect window = [[UIScreen mainScreen] bounds];
+    CGFloat windowWidth = window.size.width;
+    CGFloat windowHeight = window.size.height;
+    CGFloat buttonSize = 90.0;
+    
+    playButton.frame = CGRectMake((windowWidth - buttonSize)/2, (windowHeight - buttonSize)/2, buttonSize, buttonSize);
+    playButton.backgroundColor = [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:0.8];
+    
+    playButton.alpha = 1.0;
+    
+    [self addSubview:playButton];
+    
+    
     return self;
+}
+
+-(IBAction) pushPlayButton:(UIButton *)sender {
+    NSLog(@"hoge");
+    stopped = false;
+    playButton.alpha = 0.0;
 }
 
 
@@ -331,6 +356,23 @@ typedef enum : int {
  * @param event Event
  */
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+    if (!stopped) {
+        stopped = true;
+        playButton.alpha = 1.0;
+        [playButton addTarget:self action:@selector(pushPlayButton:) forControlEvents:UIControlEventTouchUpInside];
+        [UIView animateWithDuration:3.0f
+                         animations:^{
+                             playButton.alpha = 1.0;
+                         }];
+    } else {
+        playButton.alpha = 1.0;
+        [playButton addTarget:self action:@selector(pushPlayButton:) forControlEvents:UIControlEventTouchUpInside];
+        [UIView animateWithDuration:5.0f
+                         animations:^{
+                             playButton.alpha = 1.0;
+                         }];
+    }
 
     [_timer invalidate];
     _timer = nil;
@@ -494,6 +536,8 @@ typedef enum : int {
  * @param diffy Rotation amount (xy plane)
  */
 -(void) rotate:(int) diffx diffy:(int) diffy {
+    
+    if (stopped) return;
 
     float xz;
     float y;
