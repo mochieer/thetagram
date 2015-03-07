@@ -13,6 +13,7 @@
 
 -(id)init:(CGRect)rect image:(NSMutableData *)imageData width:(int)width height:(int)height yaw:(float)yaw roll:(float)roll pitch:(float)pitch;
 -(void)setImage:(NSMutableData *)imageData width:(int)width height:(int)height yaw:(float)yaw roll:(float)roll pitch:(float)pitch;
+-(void)setPosture: (float)yaw roll:(float)roll pitch:(float)pitch;
 
 @property GLRenderView *glRenderView;
 @end
