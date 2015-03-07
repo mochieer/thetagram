@@ -66,6 +66,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         // TableViewのページング処理
         tableView.pagingEnabled = true
         
+        // TableViewの線を消す
+        tableView.separatorColor = UIColor.clearColor()
+        
         // Cell名の登録をおこなう.
         tableView.registerClass(ListViewCell.self, forCellReuseIdentifier: "MyCell")
         
