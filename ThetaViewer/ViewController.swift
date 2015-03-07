@@ -10,18 +10,6 @@ import UIKit
 import CoreMotion
 
 
-func format(deg:Float) -> Float {
-    let unit:Float = 360
-    // println(Int(deg / unit))
-    var ret:Float = deg - unit * Float(Int(deg/unit))
-    
-    while(ret > 0.0){
-        ret -= 90.0
-    }
-    
-    return ret
-}
-
 class ViewController: UIViewController, MyProtocol {
     
     var device = DevicePosture()
@@ -207,95 +195,4 @@ class ViewController: UIViewController, MyProtocol {
  
 }
 
-
-
-protocol MyProtocol {
-    func detect(CMAttitude)
-}
-
-class DevicePosture {
-    var prot: MyProtocol?
-    
-    let motionManager: CMMotionManager
-    var patti: CMAttitude?
-    
-    var thresold = degreesToRadians(0.01) ^ 2 // 0.5[deg]以上の変化
-    var minMax = [0.0, 0.0]
-
-    init() {
-        self.motionManager = CMMotionManager()
-        // println("thresold = \(self.thresold)")
-    }
-    func start() {
-        // Initialize MotionManager
-        self.motionManager.deviceMotionUpdateInterval = 0.05 // 20Hz
-        
-        // Start motion data acquisition
-        self.motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.currentQueue(), withHandler : {
-            deviceManager, error in
-            var accel : CMAcceleration = deviceManager.userAcceleration
-            var gyro : CMRotationRate = deviceManager.rotationRate
-            var attitude : CMAttitude = deviceManager.attitude
-            var quaternion : CMQuaternion = attitude.quaternion
-            
-            if (self.patti != nil) {
-                var diff = [self.patti!.yaw - attitude.yaw, self.patti!.roll - attitude.roll, self.patti!.pitch - attitude.pitch]
-                var length:Double? = diff * diff
-                if (length! > self.thresold){
-                    self.prot!.detect(attitude)
-                }
-            }
-            self.patti = attitude
-        })
-    }
-    
-    func stop() {
-        if (self.motionManager.deviceMotionActive) {
-            self.motionManager.stopMagnetometerUpdates()
-        }
-    }
-}
-
-
-
-// 以下関数
-
-// Degrees to Radian
-func degreesToRadians(degrees:Double) -> Double {
-    return degrees / 180.0 * M_PI
-}
-
-// Radians to Degrees
-func radiansToDegrees(radians:Double) -> Double {
-    return radians  * (180.0 / M_PI)
-}
-
-// power
-func ^ (left:Double, right:Double) -> Double {
-    return pow(left, right)
-}
-
-// Inner product
-func * (left:Array<Double>, right:Array<Double>) -> Double? {
-    if (left.count != right.count) {
-        return nil;
-    }
-    var ret = 0.0
-    for (var i = 0; i < left.count; i++) {
-        ret += left[i] * right[i]
-    }
-    return ret
-}
-
-func getAverage(array:Array<Float>) -> Float {
-    if (array.count == 0) {
-        return 0.0
-    }
-    
-    var average:Float = 0.0
-    for value in array {
-        average += value
-    }
-    return (average / Float(array.count))
-}
 
