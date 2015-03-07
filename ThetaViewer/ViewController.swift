@@ -133,6 +133,7 @@ class ViewController: UIViewController, MyProtocol {
         // println(String(format:"diff = (%.2f, %.2f, %.2f)", radiansToDegrees(att.yaw), radiansToDegrees(att.roll), radiansToDegrees(att.pitch)))
         // println(String(format:"pic = (%.2f, %.2f, %.2f)", yaw, roll, pitch))
         
+        // TOOD: ここいらん　洗い出して削除
         if (fabsf(diffYaw) > 1 && true) {
             if (diffYaw > 0) {
                 yaw -= sqrtf(diffYaw)
