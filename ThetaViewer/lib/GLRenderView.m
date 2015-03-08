@@ -111,6 +111,9 @@ typedef enum : int {
     double inertiaRatio;
     
     GLuint tex_name;
+    
+    BOOL stopped;
+    UIImageView* lockView;
 }
 
 // opengl shader and program
@@ -175,6 +178,13 @@ typedef enum : int {
     
     tex_name = 0;
     
+    stopped = false;
+    
+    lockView = [[UIImageView alloc]init];
+    lockView.alpha = 0.0;
+    
+    [self addSubview:lockView];
+    
     return self;
 }
 
@@ -209,7 +219,6 @@ typedef enum : int {
  * @param roll Camera horizontal angle
  */
 -(void) setTexture:(NSMutableData*)data width:(int)width height:(int)height yaw:(float)yaw pitch:(float) pitch roll:(float) roll {
-    
     NSError *error;
     // GLuint name;
     
@@ -331,7 +340,44 @@ typedef enum : int {
  * @param event Event
  */
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+
+    CGRect window = [[UIScreen mainScreen] bounds];
+    CGFloat windowWidth = window.size.width;
+    CGFloat windowHeight = window.size.height;
     
+    if (stopped) {
+        CGFloat lockViewWidth = 52.0;
+        CGFloat lockViewHeight = 57.5;
+        lockView.frame = CGRectMake((windowWidth - lockViewWidth)/2, (windowHeight - lockViewHeight)/2, lockViewWidth, lockViewHeight);
+        lockView.image = [UIImage imageNamed:@"unlock"];
+        lockView.alpha = 1.0;
+        [UIView animateWithDuration:1.2f
+                              delay:0.3f
+                            options:UIViewAnimationCurveEaseInOut
+                         animations:^{
+                             // アニメーションをする処理
+                             lockView.alpha = 0.0;
+                         } completion:^(BOOL finished) {
+                             // アニメーションが終わった後実行する処理
+                         }];
+    } else {
+        CGFloat lockViewWidth = 40.0;
+        CGFloat lockViewHeight = 52.5;
+        lockView.frame = CGRectMake((windowWidth - lockViewWidth)/2, (windowHeight - lockViewHeight)/2, lockViewWidth, lockViewHeight);
+        lockView.image = [UIImage imageNamed:@"lock"];
+        lockView.alpha = 1.0;
+        [UIView animateWithDuration:1.2f
+                              delay:0.3f
+                            options:UIViewAnimationCurveEaseInOut
+                         animations:^{
+                             // アニメーションをする処理
+                             lockView.alpha = 0.0;
+                         } completion:^(BOOL finished) {
+                             // アニメーションが終わった後実行する処理
+                         }];
+    }
+    stopped = !stopped;
+
     [_timer invalidate];
     _timer = nil;
     _timerCount = 0;
@@ -495,6 +541,8 @@ typedef enum : int {
  */
 -(void) rotate:(int) diffx diffy:(int) diffy {
     
+    if (stopped) return;
+
     float xz;
     float y;
     
