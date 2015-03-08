@@ -180,17 +180,7 @@ typedef enum : int {
     
     stopped = false;
     
-    lockView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"locked.png"]];
-    
-    lockView.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0];
-    
-    CGRect window = [[UIScreen mainScreen] bounds];
-    CGFloat windowWidth = window.size.width;
-    CGFloat windowHeight = window.size.height;
-    CGFloat lockViewSize = 90.0;
-    
-    lockView.frame = CGRectMake((windowWidth - lockViewSize)/2, (windowHeight - lockViewSize)/2, lockViewSize, lockViewSize);
-    
+    lockView = [[UIImageView alloc]init];
     lockView.alpha = 0.0;
     
     [self addSubview:lockView];
@@ -350,9 +340,16 @@ typedef enum : int {
  * @param event Event
  */
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+
+    CGRect window = [[UIScreen mainScreen] bounds];
+    CGFloat windowWidth = window.size.width;
+    CGFloat windowHeight = window.size.height;
     
-    stopped = !stopped;
-    if (!stopped) {
+    if (stopped) {
+        CGFloat lockViewWidth = 52.0;
+        CGFloat lockViewHeight = 57.5;
+        lockView.frame = CGRectMake((windowWidth - lockViewWidth)/2, (windowHeight - lockViewHeight)/2, lockViewWidth, lockViewHeight);
+        lockView.image = [UIImage imageNamed:@"unlock"];
         lockView.alpha = 1.0;
         [UIView animateWithDuration:1.2f
                               delay:0.3f
@@ -364,6 +361,10 @@ typedef enum : int {
                              // アニメーションが終わった後実行する処理
                          }];
     } else {
+        CGFloat lockViewWidth = 40.0;
+        CGFloat lockViewHeight = 52.5;
+        lockView.frame = CGRectMake((windowWidth - lockViewWidth)/2, (windowHeight - lockViewHeight)/2, lockViewWidth, lockViewHeight);
+        lockView.image = [UIImage imageNamed:@"lock"];
         lockView.alpha = 1.0;
         [UIView animateWithDuration:1.2f
                               delay:0.3f
@@ -375,6 +376,7 @@ typedef enum : int {
                              // アニメーションが終わった後実行する処理
                          }];
     }
+    stopped = !stopped;
 
     [_timer invalidate];
     _timer = nil;
