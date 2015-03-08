@@ -113,7 +113,7 @@ typedef enum : int {
     GLuint tex_name;
     
     BOOL stopped;
-    UIButton* playButton;
+    UIImageView* lockView;
 }
 
 // opengl shader and program
@@ -180,27 +180,22 @@ typedef enum : int {
     
     stopped = false;
     
-    playButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    lockView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"locked.png"]];
+    
+    lockView.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0];
+    
     CGRect window = [[UIScreen mainScreen] bounds];
     CGFloat windowWidth = window.size.width;
     CGFloat windowHeight = window.size.height;
-    CGFloat buttonSize = 90.0;
+    CGFloat lockViewSize = 90.0;
     
-    playButton.frame = CGRectMake((windowWidth - buttonSize)/2, (windowHeight - buttonSize)/2, buttonSize, buttonSize);
-    playButton.backgroundColor = [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:0.8];
+    lockView.frame = CGRectMake((windowWidth - lockViewSize)/2, (windowHeight - lockViewSize)/2, lockViewSize, lockViewSize);
     
-    playButton.alpha = 1.0;
+    lockView.alpha = 0.0;
     
-    [self addSubview:playButton];
-    
+    [self addSubview:lockView];
     
     return self;
-}
-
--(IBAction) pushPlayButton:(UIButton *)sender {
-    NSLog(@"hoge");
-    stopped = false;
-    playButton.alpha = 0.0;
 }
 
 
@@ -234,7 +229,6 @@ typedef enum : int {
  * @param roll Camera horizontal angle
  */
 -(void) setTexture:(NSMutableData*)data width:(int)width height:(int)height yaw:(float)yaw pitch:(float) pitch roll:(float) roll {
-    
     NSError *error;
     // GLuint name;
     
@@ -357,20 +351,28 @@ typedef enum : int {
  */
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     
+    stopped = !stopped;
     if (!stopped) {
-        stopped = true;
-        playButton.alpha = 1.0;
-        [playButton addTarget:self action:@selector(pushPlayButton:) forControlEvents:UIControlEventTouchUpInside];
-        [UIView animateWithDuration:3.0f
+        lockView.alpha = 1.0;
+        [UIView animateWithDuration:1.5f
+                              delay:0.5f
+                            options:UIViewAnimationCurveEaseInOut
                          animations:^{
-                             playButton.alpha = 1.0;
+                             // アニメーションをする処理
+                             lockView.alpha = 0.0;
+                         } completion:^(BOOL finished) {
+                             // アニメーションが終わった後実行する処理
                          }];
     } else {
-        playButton.alpha = 1.0;
-        [playButton addTarget:self action:@selector(pushPlayButton:) forControlEvents:UIControlEventTouchUpInside];
-        [UIView animateWithDuration:5.0f
+        lockView.alpha = 1.0;
+        [UIView animateWithDuration:1.5f
+                              delay:0.5f
+                            options:UIViewAnimationCurveEaseInOut
                          animations:^{
-                             playButton.alpha = 1.0;
+                             // アニメーションをする処理
+                             lockView.alpha = 0.0;
+                         } completion:^(BOOL finished) {
+                             // アニメーションが終わった後実行する処理
                          }];
     }
 
